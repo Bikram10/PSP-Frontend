@@ -1,0 +1,63 @@
+#wrapper{
+  width: 100%;
+  background-color: #f4F4F4;
+  position: absolute;
+  margin-top: 3px;
+}
+
+.wrapper #header{
+  margin: 0.5em;
+}
+
+#category-container{
+  background: #FFFFFF;
+  height: 60vh;
+  border: 1px solid black;
+}
+.dropzone-wrapper {
+  border: 2px dashed #91b0b3;
+  color: #92b0b3;
+  position: relative;
+  height: 150px;
+  width: 48.5%;
+}
+
+.dropzone-desc {
+  position: absolute;
+  margin: 0 auto;
+  left: 0;
+  right: 0;
+  text-align: center;
+  width: 40%;
+  top: 50px;
+  font-size: 16px;
+}
+.dropzone,
+.dropzone:focus {
+  position: absolute;
+  outline: none !important;
+  width: 100%;
+  height: 150px;
+  cursor: pointer;
+  opacity: 0;
+}
+
+#category-container form{
+  margin: 1em;
+}
+
+#category-container form label{
+  margin-top: 1em;
+}
+
+#category-container form input{
+  margin-top: 1em;
+}
+
+.btn{
+  background-color: #EB4D4B;
+  width: 8em;
+  color: white;
+  margin-left: 5em;
+}
+
