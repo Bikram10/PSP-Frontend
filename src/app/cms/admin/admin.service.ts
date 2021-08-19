@@ -12,6 +12,6 @@ export class AdminService {
   constructor(private http: HttpClient) { }
 
   saveCategory(formData: FormData): Observable<Category>{
-    return this.http.post(this.baseUrl + "/category", formData);
+    return this.http.post<any>(this.baseUrl + "/category", formData);
   }
 }
