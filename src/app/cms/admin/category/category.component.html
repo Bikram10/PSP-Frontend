@@ -4,7 +4,8 @@
 <div class="container-fluid" id="wrapper">
   <div id="header">
      <h3>Add Product</h3>
-      <span>Here You can add a category</span>
+    <button type="button" (click)="addProduct()" class="btn-info">Add Product</button>
+    <span>Here You can add a category</span>
   </div>
   <div id="category-container">
       <form [formGroup]="myForm" >
@@ -23,11 +24,10 @@
           <div *ngFor="let file of files">
             <img *ngIf="file" [src]="file.url" width="100px" height="100px">
           </div>
-          <input type="file" name="img_logo"   class="dropzone">
         </div>
         </div>
       </form>
-    <button type="submit" class="btn" (click)="onSubmit()">Submit</button>
+    <button type="submit" class="submit-info" (click)="onSubmit()">Submit</button>
 
   </div>
 </div>
