@@ -1,0 +1,106 @@
+<script src="productupdate.component.ts"></script>
+<app-dashboard></app-dashboard>
+<div class="container-fluid" id="wrapper">
+  <div id="header">
+    <h3>Add Product</h3>
+    <span>Here You can add a product</span>
+  </div>
+
+  <div class="product-container">
+    <form [formGroup] = "myForm">
+      <div class="form-group col-md-6">
+        <label style="font-family: 'Crimson Text', sans-serif">Product Name</label>
+        <input type="text" class="form-control" formControlName = "product_name">
+      </div>
+        <div class="col-md-6">
+          <label for="exampleFormControlSelect1" style="font-family: 'Crimson Text', sans-serif">Product Category</label>
+          <select class="form-control" id="exampleFormControlSelect1" formControlName="category_name"  (change)="changeCategory($event)">
+            <option [value]="cat.category_id" *ngFor="let cat of categories; index as i" [ngValue]="cat.category_name">{{cat.category_name}}</option>
+            <option></option>
+          </select>
+        </div>
+
+      <div class="form-group col-md-6">
+        <label for="exampleFormControlTextarea1" style="font-family: 'Crimson Text', sans-serif">Product Description</label>
+        <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" formControlName="product_description"></textarea>
+      </div>
+      <div class="form-group col-md-6">
+        <label style="font-family: 'Crimson Text', sans-serif">Product Price</label>
+        <input type="text" class="form-control" formControlName = "product_price">
+      </div>
+      <div class="form-group col-md-6">
+        <label style="font-family: 'Crimson Text', sans-serif">Product Quantity</label>
+        <input type="text" class="form-control" formControlName = "product_quantity">
+      </div>
+      <div class="form-group col-md-6">
+        <label style="font-family: 'Crimson Text', sans-serif">Stock Status</label>
+        <select class="form-control" id="stockId" formControlName="stock_status">
+          <option>Select Category</option>
+          <option value="In Stock">IN STOCK</option>
+          <option value="Out of Order">OUT OF ORDER</option>
+        </select>
+      </div>
+      <div class="form-group col-md-6">
+        <label style="font-family: 'Crimson Text', sans-serif;">Product Image</label>
+        <div class="drag-container" appDnd (fileDropped)="onFileDropped($event)">
+          <input type="file" #fileDropRef id="fileDropRef" (change)="fileBrowseHandler($event.target)" />
+          <img src="assets/dnd/ic-upload-file.svg" alt="">
+          <h3>Drag and drop file here</h3>
+          <h3>or</h3>
+          <label for="fileDropRef">Browse for file</label>
+        </div>
+        <div class="files-list">
+          <div class="single-file" *ngFor="let file of files; let i = index">
+            <img src="assets/dnd/ic-file.svg" width="45px" alt="file">
+            <div class="info">
+              <h4 class="name">
+                {{ file?.name }}
+              </h4>
+              <p class="size">
+                {{ formatBytes(file?.size) }}
+              </p>
+              <app-progress [progress]="file?.progress"></app-progress>
+            </div>
+            <img src="assets/dnd/ic-delete-file.svg" class="delete" width="20px" alt="file" (click)="deleteFile(i)">
+          </div>
+        </div>
+      </div>
+      <div class="form-group col-md-6">
+        <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+          <div class="panel panel-default">
+            <div class="panel-heading" role="tab" id="headingOne">
+              <h4 class="panel-title">
+                <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                  <i class="more-less glyphicon glyphicon-plus"></i>
+                  Technical Details
+                </a>
+              </h4>
+            </div>
+            <div id="collapseOne" class="panel-collapse collapse show" role="tabpanel" aria-labelledby="headingOne">
+              <div class="panel-body" formArrayName="attributes">
+                <div class="attribute-info" *ngFor="let atr of attributeForm.controls; let i=index" [formGroupName]="i">
+                  <div class="list-group-item" style="margin-bottom: 1em">
+                    <label>Choose Attributes</label>
+
+                    <select class="form-control" formControlName="attributeType" [value]="atr.value.attributeType">
+
+                      <option *ngFor="let attr of features; let i = index" [value]="attr">{{attr}}</option>
+                    </select>
+                    <div class="form-group">
+                      <input type="text" style="margin-top: 1em" class="form-control" formControlName="attributeName"/>
+                    </div>
+                    <button type="button" class="submit-info" (click)="removeAttribute(i)" style="margin-top: 0.5em; margin-left: 0em; width: 25%">Remove</button>
+
+                  </div>
+                </div>
+              </div>
+              <button type="button" class="submit-info" (click)="addAttribute()" style="margin-top: 0.5em; margin-left: 0em; width: 25%">Add</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+
+    <button type="submit" class="submit-info">Submit</button>
+  </div>
+</div>

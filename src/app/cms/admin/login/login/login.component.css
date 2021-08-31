@@ -1,0 +1,58 @@
+body {
+  margin: 0;
+  padding: 0;
+  background-color: rgb(211 212 214);
+  height: 100vh;
+}
+#login .container #login-row #login-column #login-box {
+  margin-top: 40px;
+  max-width: 600px;
+  height: 320px;
+  border: 1px solid #9C9C9C;
+  background-color: #FFFFFF;
+}
+#login .container #login-row #login-column #login-box #login-form {
+  padding: 20px;
+}
+#login .container #login-row #login-column #login-box #login-form #register-link {
+  margin-top: -85px;
+}
+
+.submit-info{
+  background-color: #EB4D4B;
+  color: white;
+  padding: 10px;
+  border-radius: 5px;
+  border-color: transparent;
+  width: 100%;
+
+}
+.create-info{
+  width: 462px;
+  margin-right: 24px;
+  background-color: #EB4D4B;
+  color: #FFFFFF;
+  border: #EB4D4B;
+  height: 3em;
+}
+.separator {
+  display: flex;
+  align-items: center;
+  text-align: center;
+}
+
+.separator::before,
+.separator::after {
+  content: '';
+  flex: 1;
+  border-bottom: 1px solid #000;
+}
+
+.separator:not(:empty)::before {
+  margin-right: .25em;
+}
+
+.separator:not(:empty)::after {
+  margin-left: .25em;
+}
+

@@ -1,0 +1,41 @@
+body{
+  /* This is for setting the background color of our document. */
+  background-color: rgb(211 212 214)
+}
+
+button{
+  /* The register button */
+  background-color: #EB4D4B;
+  color: white;
+  padding: 10px;
+  border-radius: 5px;
+  border-color: transparent;
+}
+.container{
+  /* The container for the name and inputs */
+  display: flex;
+  flex-direction: column;
+}
+
+.card{
+  /* the form */
+  background-color:white;
+  width:30%;
+  padding: 10px;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  -webkit-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+
+}
+
+.inputs{
+  /* the inputs */
+  padding: 10px;
+  text-align: center;
+  border-radius: 5px;
+  border-color: rgb(219, 219, 219);
+  border-style: solid;
+
+}

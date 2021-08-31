@@ -1,0 +1,43 @@
+<body>
+<h3 class="text-center text-white pt-5" style="position: relative; font-size: 20px; top: 1em">Create Account</h3>
+<form [formGroup]="myForm">
+<div class="container card col-md-4">
+  <div class="container">
+    <p>Username</p>
+    <input placeholder="Name" class="inputs" id="username" type="text" formControlName="username" [ngClass]="{'is-invalid': submitted && form.username.errors}"/>
+    <div *ngIf="submitted && form.username.errors" class="invalid-feedback">
+    <div *ngIf="form.username.errors">Username is invalid</div>
+    </div>
+  </div>
+  <div class="container">
+    <p>Email</p>
+    <input placeholder="Email" class="inputs" id="email" type="text" formControlName="email" [ngClass]="{'is-invalid': submitted && form.email.errors}"/>
+    <div *ngIf="submitted && form.email.errors" class="invalid-feedback">
+    <div *ngIf="form.email.errors.required">Email is required</div>
+    <div *ngIf="form.email.errors.email">Email is invalid</div>
+    </div>
+  </div>
+  <div class="container">
+    <p>Password</p>
+    <input placeholder="Password" class="inputs" id="password" type="password" formControlName="password" [ngClass]="{'is-invalid': submitted && form.password.errors}"/>
+    <div *ngIf="submitted && form.password.errors" class="invalid-feedback">
+    <div *ngIf="form.password.errors.required">Password is required</div>
+    </div>
+  </div>
+  <div class="container">
+    <p>Re-type Password</p>
+    <input placeholder="Re-type Password" class="inputs" id="re_type" type="password" formControlName="retype" [ngClass]="{'is-invalid': submitted && form.retype.errors}"/>
+    <div *ngIf="submitted && form.retype.errors" class="invalid-feedback">
+      <div *ngIf="form.retype.errors.required">Retype Password is required</div>
+      <div *ngIf="form.retype.errors.mustMatch">Passwords must match</div>
+    </div>
+  </div>
+  <div
+    class="container"
+    style="margin-top: 20px; margin-left: 10px; margin-right: 10px"
+  >
+    <button id="register_button" type="submit" (click)="saveUser()">Register</button>
+  </div>
+</div>
+</form>
+</body>
