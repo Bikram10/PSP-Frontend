@@ -54,10 +54,22 @@
   margin-top: 1em;
 }
 
-.btn{
+.submit-info{
   background-color: #EB4D4B;
-  width: 8em;
+  position: relative;
+  margin-top: -0.5em;
+  width: 12%;
+  min-height: 3em;
+  margin-left: 1em;
   color: white;
-  margin-left: 5em;
+}
+
+.btn-info{
+  background-color: #EB4D4B;
+  float: right;
+  position: relative;
+  margin-top: -2em;
+  width: 12%;
+  min-height: 3em;
 }
 

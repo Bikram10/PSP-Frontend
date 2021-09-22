@@ -7,23 +7,49 @@ import {DashboardComponent} from "./cms/admin/dashboard/dashboard.component";
 import { CategoryComponent } from './cms/admin/category/category.component';
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import { FiledragdropdirectiveDirective } from './cms/admin/filedragdropdirective.directive';
-import {HttpClientModule} from "@angular/common/http";
+import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
+import { LoginComponent } from './cms/admin/login/login/login.component';
+import {BasicAuthHttpInterceptorService} from "./service/basic-auth-http-interceptor.service";
+import {AuthenticationService} from "./service/authentication.service";
+import {JwtHelperService, JwtModule} from "@auth0/angular-jwt";
+import {RoleGuardService} from "./service/role-guard.service";
+import {TokenStorageService} from "./service/token-storage.service";
 
 @NgModule({
   declarations: [
     AppComponent,
     DashboardComponent,
     CategoryComponent,
-    FiledragdropdirectiveDirective
+    FiledragdropdirectiveDirective,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
+    JwtModule.forRoot({
+      config: {
+        tokenGetter: tokenGetter,
+      }
+    })
+
   ],
-  providers: [],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: BasicAuthHttpInterceptorService,
+      multi: true
+    },
+    AuthenticationService,
+    TokenStorageService,
+    RoleGuardService,
+    JwtHelperService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
+
+export function tokenGetter() {
+  return localStorage.getItem('AuthToken');
+}

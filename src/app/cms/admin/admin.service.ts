@@ -13,7 +13,8 @@ export class AdminService {
   baseUrl: String = Constants.base_url;
   constructor(private http: HttpClient) { }
 
-
+  saveCategory(formData: FormData): Observable<Category>{
+    return this.http.post<any>(this.baseUrl + "/category", formData);
 
   saveType(formData: FormData): Observable<any>{
     return this.http.post<any>(this.baseUrl + "/typeApi/type", formData);

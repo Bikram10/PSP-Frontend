@@ -14,7 +14,7 @@ export class CategoryComponent implements OnInit {
   myForm!: FormGroup;
   files: FileHandle[] = [];
   formData: FormData = new FormData();
-  category!: Category;
+  category: Category = {};
 
   filesDropped(files: FileHandle[]): void {
     this.files = files;
@@ -34,20 +34,21 @@ export class CategoryComponent implements OnInit {
 
   }
 
-  onSubmit(){
-    this.category.name = this.myForm.controls.name.value;
+  addProduct(){
 
-    this.formData.append('category', new Blob([JSON.stringify(this.category)],{
-      type: "application/json"
-    }));
+  }
+
+  onSubmit(){
+    this.category.categoryName = this.myForm.controls.name.value;
+
+    this.formData.append('category', new Blob([JSON.stringify(this.category)],{ type: "application/json"}));
 
     this.formData.append('file', this.files[0].file);
-    console.log(this.formData);
     this.adminService.saveCategory(this.formData).subscribe(
-      res => {
-          console.log(res);
+      res =>{
+        console.log(res);
       }
-    )
+    );
   }
 
 }
