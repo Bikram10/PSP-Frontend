@@ -1,0 +1,47 @@
+<app-dashboard></app-dashboard>
+<div class="container-fluid" id="wrapper">
+  <div id="header">
+    <h3>Add Product</h3>
+    <span>Here You can add a product</span>
+  </div>
+
+  <div class="product-container">
+  <form class="choose-files">
+    <div class="form-group col-md-6">
+      <label style="font-family: 'Crimson Text', sans-serif;">Product Image</label>
+      <div class="drag-container" csvDrop (filesChangeEmiter)="onFileChange($event)">
+        <input type="file"  id="fileDropRef" (change)="onFileChange($event.target)" />
+        <img src="assets/dnd/ic-upload-file.svg" alt="">
+        <h3>Drag and drop file here</h3>
+        <h3>or</h3>
+        <label for="fileDropRef">Browse for file</label>
+      </div>
+      <div class="files-list" *ngIf="progress > 0">
+        <div class="single-file">
+          <img src="assets/dnd/ic-file.svg" width="45px" alt="file">
+          <div class="info">
+            <h4 class="name">
+              {{ files[0]?.name }}
+            </h4>
+            <div
+              class="progress-bar progress-bar-info progress-bar-striped"
+              role="progressbar"
+              attr.aria-valuenow="{{ progress }}"
+              aria-valuemin="0"
+              aria-valuemax="100"
+              [ngStyle]="{ width: progress + '%' }">
+              {{ progress }}%
+            </div>
+          </div>
+          <img src="assets/dnd/ic-delete-file.svg" class="delete" width="20px" alt="file">
+        </div>
+      </div>
+    </div>
+  </form>
+
+    <br />
+    <button type="submit" class="submit-info" (click)="upload()">Upload</button>
+
+  </div>
+
+</div>

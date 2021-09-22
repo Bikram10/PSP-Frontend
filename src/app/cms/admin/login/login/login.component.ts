@@ -24,7 +24,7 @@ export class LoginComponent implements OnInit {
 
   createLoginForm(){
     this.myForm = this.formBuilder.group({
-      username: [''],
+      email: [''],
       password: ['']
     })
   }
@@ -34,19 +34,17 @@ export class LoginComponent implements OnInit {
   }
 
   login(): void {
-    this.authService.attemptAuth(this.loginDetails.username.value, this.loginDetails.password.value).subscribe(
+    this.authService.attemptAuth(this.loginDetails.email.value, this.loginDetails.password.value).subscribe(
       data => {
         this.token.saveToken(data.token);
         this.authService.changeAuthentication();
-
-
 
         const tokenPayload = this.helper.decodeToken(data.token);
 
         if(tokenPayload.scopes === "ROLE_ADMIN"){
           this.router.navigate(['dashboard']);
         } else if (tokenPayload.scopes === "ROLE_USER") {
-          this.router.navigate(['dashboard']);
+          this.router.navigate(['landing-page']);
         } else {
           this.router.navigate(['/']);
         }

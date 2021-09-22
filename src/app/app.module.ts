@@ -14,15 +14,19 @@ import {AdminModule} from "./cms/admin/admin.module";
 import {ToastrModule} from "ngx-toastr";
 import {LoginComponent} from "./cms/admin/login/login/login.component";
 import {AdminRoutingModule} from "./cms/admin/admin-routing.module";
+import { ProductDetailComponent } from './client/product-detail/product-detail.component';
+import { LandingPageComponent } from './client/landing-page/landing-page.component';
+import {ClientModule} from "./client/client.module";
 @NgModule({
   declarations: [
     AppComponent,
-    LoginComponent
+    LoginComponent,
   ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
     FormsModule,
+    ClientModule,
     ReactiveFormsModule,
     HttpClientModule,
     AppRoutingModule,

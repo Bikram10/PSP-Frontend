@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {Constants} from "../../shared/constants";
 import {Observable} from "rxjs";
-import {Category} from "./model/category";
+import {Type} from "./model/type";
 import {Form} from "@angular/forms";
 import {Product} from "./model/product";
 
@@ -13,16 +13,18 @@ export class AdminService {
   baseUrl: String = Constants.base_url;
   constructor(private http: HttpClient) { }
 
-  saveCategory(formData: FormData): Observable<any>{
-    return this.http.post<any>(this.baseUrl + "/categoryApi/category", formData);
+
+
+  saveType(formData: FormData): Observable<any>{
+    return this.http.post<any>(this.baseUrl + "/typeApi/type", formData);
   }
 
   saveProduct(formData: FormData): Observable<any>{
     return this.http.post<any>(this.baseUrl+"/productApi/product", formData);
   }
 
-  getCategory(): Observable<Category[]>{
-    return this.http.get<Category[]>(this.baseUrl + "/categoryApi/listCategory");
+  getCategory(): Observable<Type[]>{
+    return this.http.get<Type[]>(this.baseUrl + "/typeApi/listType");
   }
 
   getProduct(): Observable<Product[]>{
@@ -50,4 +52,12 @@ export class AdminService {
       });
 
   }
+
+  uploadProductCSV(formData: FormData): Observable<any>{
+    return this.http.post<any>(this.baseUrl+"/productApi/upload", formData, {
+      reportProgress: true,
+      responseType: 'json'
+    });
+  }
+
 }

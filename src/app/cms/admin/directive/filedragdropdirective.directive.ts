@@ -34,7 +34,7 @@ export class FiledragdropdirectiveDirective {
     evt.stopPropagation();
     this.background = '#eee';
 
-    let files: FileHandle[] = [];
+    /*let files: FileHandle[] = [];
     // @ts-ignore
     for (let i = 0; i < evt.dataTransfer.files.length; i++) {
       // @ts-ignore
@@ -44,6 +44,10 @@ export class FiledragdropdirectiveDirective {
     }
     if (files.length > 0) {
       this.files.emit(files);
-    }
+    }*/
+    // @ts-ignore
+    const files: any = evt.dataTransfer.files;
+    let valid_files: FileHandle[] = files;
+    this.files.emit(valid_files);
   }
 }

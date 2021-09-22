@@ -1,4 +1,4 @@
 export interface AuthLogin {
-  username?: string;
+  email?: string;
   password?: string;
 }

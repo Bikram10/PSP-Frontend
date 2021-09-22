@@ -6,7 +6,7 @@
   </div>
   <form [formGroup]="myForm">
     <div class="form-group">
-      <label style="font-family: 'Crimson Text', sans-serif">Search</label>
+      <label style="font-family: 'Crimson Text', sans-serif">Brand</label>
       <input type="text" class="form-control col-sm-2" formControlName="keyword"  [(ngModel)]="filter.keyword" (input)="getPaging()"/>
     </div>
   </form>
@@ -19,9 +19,12 @@
           <th class="border-top-0" scope="col" (click)="getPaging()"><span>ID</span><i class="fas fa-sort"></i></th>
           <th class="border-top-0" scope="col" sortable="title">IMAGE</th>
           <th class="border-top-0" scope="col" sortable="text">PRODUCT NAME</th>
+          <th class="border-top-0" scope="col" sortable="text">BRAND</th>
+          <th class="border-top-0" scope="col" sortable="text">SKU</th>
+          <th class="border-top-0" scope="col" sortable="text">Types</th>
           <th class="border-top-0" scope="col" sortable="text">CATEGORY</th>
           <th class="border-top-0" scope="col" sortable="text">PRICE</th>
-          <th class="border-top-0" scope="col" sortable="text">Description</th>
+          <th class="border-top-0" scope="col" sortable="text">DESCRIPTION</th>
           <th class="border-top-0" scope="col" sortable="text">QUANTITY</th>
           <th class="border-top-0" scope="col" sortable="text">STATUS</th>
           <th class="border-top-0" scope="col" style="width:120px">ACTION</th>
@@ -30,12 +33,15 @@
         <tbody>
         <tr *ngFor="let product of products; let i=index">
           <td>{{product.product_id}}</td>
-          <td>{{product.product_name}}}</td>
+          <td></td>
           <td>{{product.product_name}}</td>
+          <td>{{product.brand}}</td>
+          <td>{{product.SKU}}</td>
+          <td>{{product.type?.name}}</td>
           <td>{{product.category}}</td>
-          <td>{{product.product_price}}</td>
-          <td>{{product.product_description}}</td>
-          <td>{{product.product_quantity}}</td>
+          <td>{{product.price}}</td>
+          <td>{{product.description}}</td>
+          <td>{{product.quantity}}</td>
           <td>{{product.stock_status}}</td>
           <td style="white-space: nowrap">
             <a class="btn btn-secondary" [routerLink]="['../edit', product.product_id]">Edit</a>&nbsp;
@@ -51,16 +57,6 @@
           <li class="page-item"><a class="page-link" href="#" (click)="next($event)">Next</a></li>
         </ul>
       </nav>
-
-
-<!--      <div class="d-flex justify-content-between p-2">-->
-
-<!--        <select class="custom-select" style="width: auto" name="pageSize">-->
-<!--          <option [ngValue]="10">10 items per page</option>-->
-<!--          <option [ngValue]="20">20 items per page</option>-->
-<!--          <option [ngValue]="100">100 items per page</option>-->
-<!--        </select>-->
-<!--      </div>-->
-<!--    </div>-->
-<!--  </div>-->
+</div>
+</div>
 </div>

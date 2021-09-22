@@ -3,9 +3,11 @@ import {ProductupdateService} from "../productupdate.service";
 import {Product} from "../../../model/product";
 import {FormArray, FormBuilder, FormControl, FormGroup} from "@angular/forms";
 import {ActivatedRoute} from "@angular/router";
-import {Category} from "../../../model/category";
+import {Type} from "../../../model/type";
 import {Attributes} from "../../../model/attributes";
 import {createAttribute} from "@angular/compiler/src/core";
+import {AdminService} from "../../../admin.service";
+import {ToastrService} from "ngx-toastr";
 
 @Component({
   selector: 'app-productupdate',
@@ -19,15 +21,11 @@ export class ProductupdateComponent implements OnInit {
   @ViewChild("fileDropRef", { static: false }) fileDropEl!: ElementRef;
 
   files: any[] = [];
-  categories: Category[] = [];
-  formData!: FormData;
-  attributes!: FormArray;
-  features: string[] = ['RAM', 'Battery', 'Screen Size', 'Storage'];
-  attribute!: Attributes;
+  types: Type[] = [];
+  type_name: string = '';
+  formData: FormData = new FormData();
 
-  retrivesAttributes: string[] = [];
-
-  constructor(private activateRoute: ActivatedRoute, private updateService: ProductupdateService, private formBuilder: FormBuilder) { }
+  constructor(private toast: ToastrService, private adminService: AdminService, private activateRoute: ActivatedRoute, private updateService: ProductupdateService, private formBuilder: FormBuilder) { }
 
 
 
@@ -38,13 +36,12 @@ export class ProductupdateComponent implements OnInit {
     })
     this.createForm();
 
+    this.adminService.getCategory().subscribe(types => {
+        this.types = types;
+    })
     this.updateService.getProduct(id).subscribe(product => {
-      product.attributes.forEach((attribute: any, attributeIndex: number) => {
-        if(attributeIndex)
-          this.addAttribute(attribute);
-      })
+      this.type_name = product.type.name;
       this.myForm.patchValue(product);
-      console.log(this.myForm.value);
     })
 
 
@@ -53,29 +50,26 @@ export class ProductupdateComponent implements OnInit {
 
 
   changeCategory(event: any){
-    let temp: Category = {};
-    temp.category_id = event.target.value;
+    let temp: Type = {};
+    temp.type_id = event.target.value;
 
-    this.product.category = temp;
+    this.product.type = temp;
   }
   get attributeForm(){
     return this.myForm.get('attributes') as FormArray;
   }
 
-  update(){
-    this.formData.append('product', new Blob([]))
-    //this.updateService.updateProduct();
-  }
-
   createForm(){
     this.myForm = this.formBuilder.group({
+      brand: [''],
       product_name: [''],
-      category_name: [''],
-      product_description: [''],
-      product_price: [''],
-      product_quantity: [''],
+      SKU: [''],
+      category: [''],
+      type: [''],
+      description: [''],
+      price: [''],
+      quantity: [''],
       stock_status: [''],
-      attributes: this.formBuilder.array([this.createAttribute()])
     });
   }
 
@@ -95,12 +89,6 @@ export class ProductupdateComponent implements OnInit {
   removeAttribute(attributeIndex: number){
     const control = <FormArray>this.myForm.controls['attributes'];
     control.removeAt(attributeIndex);
-  }
-
-
-  addAttribute(attribute?: Attributes){
-    this.attributes = this.myForm.get('attributes') as FormArray;
-    this.attributes.push(this.createAttribute(attribute));
   }
 
   onFileDropped(event: any) {
@@ -170,6 +158,27 @@ export class ProductupdateComponent implements OnInit {
     const sizes = ["Bytes", "KB", "MB", "GB", "TB", "PB", "EB", "ZB", "YB"];
     const i = Math.floor(Math.log(bytes) / Math.log(k));
     return parseFloat((bytes / Math.pow(k, i)).toFixed(dm)) + " " + sizes[i];
+  }
+
+  update(){
+    this.product.brand = this.myForm.controls.brand.value;
+    this.product.SKU = this.myForm.controls.SKU.value;
+    this.product.category = this.myForm.controls.category.value;
+    this.product.type = this.myForm.controls.type.value;
+    this.product.product_name = this.myForm.controls.product_name.value;
+    this.product.description = this.myForm.controls.description.value;
+    this.product.price = this.myForm.controls.price.value;
+    this.product.quantity = this.myForm.controls.quantity.value;
+    this.product.stock_status = this.myForm.controls.stock_status.value;
+
+
+    this.formData.append("product", new Blob([JSON.stringify(this.product)], {type: 'application/json'}));
+    this.formData.append("file", this.files[0]);
+    this.updateService.updateProduct(this.formData).subscribe(
+      res =>{
+        this.toast.show("Product added successfully");
+      }
+    )
   }
 
 }

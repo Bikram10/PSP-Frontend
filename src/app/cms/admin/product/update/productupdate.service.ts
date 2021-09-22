@@ -11,8 +11,8 @@ export class ProductupdateService {
   private  baseUrl: string = Constants.base_url;
   constructor(private http: HttpClient) { }
 
-  updateProduct(formData: FormData){
-    this.http.post(this.baseUrl+"/productApi/updateProduct", formData);
+  updateProduct(formData: FormData): Observable<any>{
+    return this.http.post(this.baseUrl+"/productApi/product/update", formData);
   }
 
 

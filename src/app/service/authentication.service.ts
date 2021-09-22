@@ -13,8 +13,8 @@ export class AuthenticationService {
   constructor(private http: HttpClient) {
   }
 
-  attemptAuth(username: string, password: string): Observable<any> {
-    const credentials = {username: username, password: password};
+  attemptAuth(email: string, password: string): Observable<any> {
+    const credentials = {email: email, password: password};
     return this.http.post(this.baseUrl + "/token/generated-token", credentials);
   }
 

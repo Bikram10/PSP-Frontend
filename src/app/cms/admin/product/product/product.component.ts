@@ -2,7 +2,7 @@ import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import {Product} from "../../model/product";
 import {FormArray, FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 import {AdminService} from "../../admin.service";
-import {Category} from "../../model/category";
+import {Type} from "../../model/type";
 import {Toast, ToastrService} from "ngx-toastr";
 
 @Component({
@@ -15,11 +15,9 @@ export class ProductComponent implements OnInit {
   formData: FormData = new FormData();
   product: Product = {};
   myForm!: FormGroup;
-  categories: Category[] = [];
-  attribute: string[] = ['RAM', 'Battery', 'Screen Size', 'Storage'];
+  types: Type[] = [];
   stock: string[] = ['IN STOCK', 'OUT OF STOCK'];
 
-  attributes!: FormArray;
   submitted: boolean = false;
 
   title: any = '';
@@ -31,8 +29,8 @@ export class ProductComponent implements OnInit {
   ngOnInit(): void {
 
     this.adminService.getCategory().subscribe(
-      category =>{
-        this.categories = category;
+      type =>{
+        this.types = type;
       }
     )
     this.createProductForm();
@@ -108,22 +106,24 @@ export class ProductComponent implements OnInit {
   }
 
   changeCategory(event: any){
-    let temp: Category = {};
-    temp.category_id = event.target.value;
+    let temp: Type = {};
+    temp.type_id = event.target.value;
 
-    this.product.category = temp;
+    this.product.type = temp;
   }
 
   createProductForm(){
     this.myForm = this.builder.group({
       productName: ['', Validators.required],
-      categoryName: ['', Validators.required],
+      brand: ['', Validators.required],
+      SKU: ['', Validators.required],
+      category: ['', Validators.required],
+      type: ['', Validators.required],
       productDescription: ['', Validators.required],
       productPrice: ['', Validators.required],
       productQuantity: ['', Validators.required],
-      stockStatus: ['Select Category', Validators.required],
-      attributeType: ['', Validators.required],
-      attributes: this.builder.array([this.createAttribute()])
+      stockStatus: ['', Validators.required],
+
     });
   }
 
@@ -131,14 +131,9 @@ export class ProductComponent implements OnInit {
     return this.myForm.get('attributes') as FormArray;
   }
 
-  addAttribute(){
-    this.attributes = this.myForm.get('attributes') as FormArray;
-    this.attributes.push(this.createAttribute());
-  }
-
   createAttribute(): FormGroup{
     let group: FormGroup = this.builder.group({
-      attributeType: new FormControl('Select Category'),
+      attributeType: new FormControl('Select Type'),
       attributeName: new FormControl('')
     });
 
@@ -151,21 +146,23 @@ export class ProductComponent implements OnInit {
 
   saveProduct(){
     this.submitted = true;
+    this.product.brand = this.myForm.controls.brand.value;
+    this.product.SKU = this.myForm.controls.SKU.value;
     this.product.product_name = this.myForm.controls.productName.value;
-    this.product.product_description = this.myForm.controls.productDescription.value;
-    this.product.product_price = this.myForm.controls.productPrice.value;
-    this.product.product_quantity = this.myForm.controls.productQuantity.value;
+    this.product.description = this.myForm.controls.productDescription.value;
+    this.product.price = this.myForm.controls.productPrice.value;
+    this.product.quantity = this.myForm.controls.productQuantity.value;
     this.product.stock_status = this.myForm.controls.stockStatus.value;
-    this.product.attributes = this.myForm.controls.attributes.value;
 
 
     this.formData.append('product', new Blob([JSON.stringify(this.product)], {type: 'application/json'}));
     this.formData.append("file", this.files[0]);
-    this.adminService.saveProduct(this.formData).subscribe(
-      res =>{
-        this.toast.show("Product added successfully");
-      }
-    )
+    console.log(this.myForm.value);
+    // this.adminService.saveProduct(this.formData).subscribe(
+    //   res =>{
+    //     this.toast.show("Product added successfully");
+    //   }
+    // )
 
   }
 

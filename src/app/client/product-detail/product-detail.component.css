@@ -1,0 +1,31 @@
+.fontmaintain{
+  font-size: x-large;
+  font-family: "Crimson Text", sans-serif;
+  font-style: normal;
+}
+
+/* style icon */
+.inner-addon .bi {
+  position: absolute;
+  padding: 5px;
+  pointer-events: none;
+}
+
+.img-responsive{
+  position: relative;
+  top: 0.4em;
+  right: 2em;
+}
+
+/* align icon */
+.left-addon .bi  { left:  0px;}
+.right-addon .bi { right: 0px;}
+
+/* add padding  */
+.left-addon input  { padding-left:  30px; }
+.right-addon input { padding-right: 30px; }
+
+.limitHeight {
+  height: 1em;
+  overflow: hidden;
+}

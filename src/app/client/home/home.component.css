@@ -1,0 +1,97 @@
+body {
+  overflow-x: hidden;
+}
+#sidebar-wrapper {
+  min-height: 100vh;
+  margin-left: -15rem;
+  -webkit-transition: margin .25s ease-out;
+  -moz-transition: margin .25s ease-out;
+  -o-transition: margin .25s ease-out;
+  transition: margin .25s ease-out;
+}
+#sidebar-wrapper .sidebar-heading {
+  padding: 0.875rem 1.25rem;
+  font-size: 1.2rem;
+}
+#sidebar-wrapper .list-group {
+  width: 15rem;
+}
+#page-content-wrapper {
+  min-width: 100vw;
+}
+#wrapper.toggled #sidebar-wrapper {
+  margin-left: 0;
+}
+@media (min-width: 768px) {
+  #sidebar-wrapper {
+    margin-left: 0;
+  }
+  #page-content-wrapper {
+    min-width: 0;
+    width: 100%;
+  }
+  #wrapper.toggled #sidebar-wrapper {
+    margin-left: -15rem;
+  }
+}
+.manik {
+  overflow: hidden;
+}
+
+img {
+  max-width: 100%;
+  max-height: 100%;
+}
+.img-thumbnail,.rounded-circle{
+  border: 2px solid #dee2e6;
+}
+body{
+  /* This is for setting the background color of our document. */
+  background-color: rgb(207, 214, 221);
+}
+
+button{
+  /* The register button */
+  background-color: rgb(123, 154, 201);
+  color: white;
+  padding: 10px;
+  border-radius: 5px;
+  border-color: transparent;
+}
+.container{
+  /* The container for the name and inputs */
+  display: flex;
+  flex-direction: column;
+}
+
+.card{
+  /* the form */
+  background-color:white;
+  width:300px;
+  padding: 10px;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  -webkit-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+
+}
+
+.inputs{
+  /* the inputs */
+  padding: 10px;
+  text-align: center;
+  border-radius: 5px;
+  border-color: rgb(219, 219, 219);
+  border-style: solid;
+  color: rgb(219, 219, 219);
+}
+.horizontal-scrollable > .row {
+  overflow-x: auto;
+  white-space: nowrap;
+}
+
+.horizontal-scrollable > .row > .col-md-3 {
+  display: inline-block;
+  float: none;
+}

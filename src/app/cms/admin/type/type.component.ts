@@ -1,21 +1,20 @@
 import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import {FormBuilder, FormGroup} from "@angular/forms";
-import {FileHandle} from "../filedragdropdirective.directive";
-import {Category} from "../model/category";
+import {Type} from "../model/type";
 import {AdminService} from "../admin.service";
 
 @Component({
   selector: 'app-category',
-  templateUrl: './category.component.html',
-  styleUrls: ['./category.component.css']
+  templateUrl: './type.component.html',
+  styleUrls: ['./type.component.css']
 })
-export class CategoryComponent implements OnInit {
+export class TypeComponent implements OnInit {
 
   myForm!: FormGroup;
   @ViewChild("fileDropRef", { static: false }) fileDropEl!: ElementRef;
   files: any[] = [];
   formData: FormData = new FormData();
-  category: Category = {};
+  type: Type = {};
 
   constructor(private formBuilder: FormBuilder, private adminService: AdminService) {
   }
@@ -104,13 +103,12 @@ export class CategoryComponent implements OnInit {
   }
 
   onSubmit(){
-    this.category.category_name = this.myForm.controls.name.value;
-    console.log(this.category.category_name);
+    this.type.name = this.myForm.controls.name.value;
 
-    this.formData.append('category', new Blob([JSON.stringify(this.category)],{ type: "application/json"}));
+    this.formData.append('category', new Blob([JSON.stringify(this.type)],{ type: "application/json"}));
 
     this.formData.append('file', this.files[0]);
-    this.adminService.saveCategory(this.formData).subscribe(
+    this.adminService.saveType(this.formData).subscribe(
       res =>{
         console.log(res);
       }

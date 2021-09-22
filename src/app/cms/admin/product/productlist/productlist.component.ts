@@ -39,14 +39,13 @@ export class ProductlistComponent implements OnInit {
 
   listSearch(){
     this.adminService.getProduct().subscribe(data => {
-      this.products = this.search(data);
+      this.products = data;
     });
   }
 
   getPaging(){
     this.adminService.getPagingProduct(this.page, this.filter.keyword).subscribe((data: any) =>{
-      console.log(this.filter.keyword);
-        this.products = this.search(data['content']);
+        this.products = data['content'];
         this.pages = new Array(data['totalPages']);
     });
 
@@ -86,12 +85,6 @@ export class ProductlistComponent implements OnInit {
   }
 
   updateProduct(id: any){
-  }
-
-  search(products: Product[]){
-      return products.filter((e) => {
-        return e.product_name?.toLowerCase().includes(this.filter.keyword.toLowerCase());
-      });
   }
 
 

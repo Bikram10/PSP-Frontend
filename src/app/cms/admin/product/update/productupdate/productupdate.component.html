@@ -9,33 +9,45 @@
   <div class="product-container">
     <form [formGroup] = "myForm">
       <div class="form-group col-md-6">
+        <label style="font-family: 'Crimson Text', sans-serif">Brand</label>
+        <input type="text" class="form-control" formControlName = "brand">
+      </div>
+      <div class="form-group col-md-6">
         <label style="font-family: 'Crimson Text', sans-serif">Product Name</label>
         <input type="text" class="form-control" formControlName = "product_name">
       </div>
+      <div class="form-group col-md-6">
+        <label style="font-family: 'Crimson Text', sans-serif">SKU</label>
+        <input type="text" class="form-control" formControlName = "SKU">
+      </div>
+      <div class="form-group col-md-6">
+        <label style="font-family: 'Crimson Text', sans-serif">Category</label>
+        <input type="text" class="form-control" formControlName = "category">
+      </div>
         <div class="col-md-6">
-          <label for="exampleFormControlSelect1" style="font-family: 'Crimson Text', sans-serif">Product Category</label>
-          <select class="form-control" id="exampleFormControlSelect1" formControlName="category_name"  (change)="changeCategory($event)">
-            <option [value]="cat.category_id" *ngFor="let cat of categories; index as i" [ngValue]="cat.category_name">{{cat.category_name}}</option>
+          <label for="exampleFormControlSelect1" style="font-family: 'Crimson Text', sans-serif">Product Type</label>
+          <select class="form-control" id="exampleFormControlSelect1" formControlName="type"  (change)="changeCategory($event)" [value]="type_name">
+            <option  *ngFor="let cat of types; index as i" [value]="cat.name">{{cat.name}}</option>
             <option></option>
           </select>
         </div>
 
       <div class="form-group col-md-6">
         <label for="exampleFormControlTextarea1" style="font-family: 'Crimson Text', sans-serif">Product Description</label>
-        <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" formControlName="product_description"></textarea>
+        <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" formControlName="description"></textarea>
       </div>
       <div class="form-group col-md-6">
         <label style="font-family: 'Crimson Text', sans-serif">Product Price</label>
-        <input type="text" class="form-control" formControlName = "product_price">
+        <input type="text" class="form-control" formControlName = "price">
       </div>
       <div class="form-group col-md-6">
         <label style="font-family: 'Crimson Text', sans-serif">Product Quantity</label>
-        <input type="text" class="form-control" formControlName = "product_quantity">
+        <input type="text" class="form-control" formControlName = "quantity">
       </div>
       <div class="form-group col-md-6">
         <label style="font-family: 'Crimson Text', sans-serif">Stock Status</label>
         <select class="form-control" id="stockId" formControlName="stock_status">
-          <option>Select Category</option>
+          <option>Select Type</option>
           <option value="In Stock">IN STOCK</option>
           <option value="Out of Order">OUT OF ORDER</option>
         </select>
@@ -65,42 +77,8 @@
           </div>
         </div>
       </div>
-      <div class="form-group col-md-6">
-        <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
-          <div class="panel panel-default">
-            <div class="panel-heading" role="tab" id="headingOne">
-              <h4 class="panel-title">
-                <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                  <i class="more-less glyphicon glyphicon-plus"></i>
-                  Technical Details
-                </a>
-              </h4>
-            </div>
-            <div id="collapseOne" class="panel-collapse collapse show" role="tabpanel" aria-labelledby="headingOne">
-              <div class="panel-body" formArrayName="attributes">
-                <div class="attribute-info" *ngFor="let atr of attributeForm.controls; let i=index" [formGroupName]="i">
-                  <div class="list-group-item" style="margin-bottom: 1em">
-                    <label>Choose Attributes</label>
-
-                    <select class="form-control" formControlName="attributeType" [value]="atr.value.attributeType">
-
-                      <option *ngFor="let attr of features; let i = index" [value]="attr">{{attr}}</option>
-                    </select>
-                    <div class="form-group">
-                      <input type="text" style="margin-top: 1em" class="form-control" formControlName="attributeName"/>
-                    </div>
-                    <button type="button" class="submit-info" (click)="removeAttribute(i)" style="margin-top: 0.5em; margin-left: 0em; width: 25%">Remove</button>
-
-                  </div>
-                </div>
-              </div>
-              <button type="button" class="submit-info" (click)="addAttribute()" style="margin-top: 0.5em; margin-left: 0em; width: 25%">Add</button>
-            </div>
-          </div>
-        </div>
-      </div>
     </form>
 
-    <button type="submit" class="submit-info">Submit</button>
+    <button type="submit" class="submit-info" (click)="update()">Submit</button>
   </div>
 </div>
