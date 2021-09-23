@@ -16,6 +16,8 @@ export class ProductDetailComponent implements OnInit {
   types: Type[] = [];
   brands: Array<any> = [];
   product!: Product[];
+
+  productsArr: Product[] = [];
   searchProduct: string = '';
   min: number = 0;
   max: number = 0;
@@ -25,6 +27,7 @@ export class ProductDetailComponent implements OnInit {
   brandParameter: any[] = [];
   cartNumber: number = 0;
   cartProductList: any[] = [];
+  formData: FormData = new FormData();
 
   @Output()
   productAdded: EventEmitter<any> = new EventEmitter<any>();
@@ -91,14 +94,20 @@ export class ProductDetailComponent implements OnInit {
   }
 
   addCart(product: Product){
-    const productExist = this.cartProductList.find(p => p.product_id === product.product_id);
 
-    if(!productExist){
-      this.cartProductList.push({...product, count: 1});
-      return;
-    }
-    productExist.count +=1;
-    this.productAdded.emit(this.cartProductList);
+    this.formData.append('product', new Blob([JSON.stringify(product)], {type: "application/json"}));
+    this.clientService.saveCart(this.formData).subscribe(res => {
+      console.log(res);
+    });
+    // const productExist = this.cartProductList.find(p => p.product_id === product.product_id);
+    //
+    // if(!productExist){
+    //   this.cartProductList.push({...product, count: 1});
+    //   return;
+    // }
+    // productExist.count +=1;
+    // this.productAdded.emit(this.cartProductList);
+
   }
 
 }

@@ -38,5 +38,9 @@ export class ClientService {
     return this.http.get(this.baseUrl+"/typeApi/listType");
   }
 
+  saveCart(formData: FormData): Observable<any>{
+    return this.http.post(this.baseUrl + "/cartApi/addData", formData);
+  }
+
 
 }
