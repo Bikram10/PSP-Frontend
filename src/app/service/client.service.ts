@@ -38,5 +38,9 @@ export class ClientService {
     return this.http.get(this.baseUrl+"/typeApi/listType");
   }
 
+  saveCart(product: Product): Observable<Product>{
+    return this.http.post(this.baseUrl+"/cartApi/addData", product);
+  }
+
 
 }
