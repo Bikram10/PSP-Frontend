@@ -156,6 +156,7 @@ export class ProductComponent implements OnInit {
     this.product.price = this.myForm.controls.productPrice.value;
     this.product.quantity = this.myForm.controls.productQuantity.value;
     this.product.stock_status = this.myForm.controls.stockStatus.value;
+    
 
 
     this.formData.append('product', new Blob([JSON.stringify(this.product)], {type: 'application/json'}));
