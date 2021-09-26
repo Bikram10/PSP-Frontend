@@ -144,6 +144,9 @@ export class ProductComponent implements OnInit {
     control.removeAt(attributeIndex);
   }
 
+  get form(){
+    return this.myForm.controls;
+  }
   saveProduct(){
     this.submitted = true;
     this.product.brand = this.myForm.controls.brand.value;

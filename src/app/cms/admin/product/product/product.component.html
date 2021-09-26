@@ -9,45 +9,81 @@
     <form [formGroup] = "myForm">
       <div class="form-group col-md-6">
         <label style="font-family: 'Crimson Text', sans-serif">Brand</label>
-        <input type="text" class="form-control" formControlName = "brand">
+        <input type="text" class="form-control" formControlName = "brand" [ngClass]="{'is-invalid': submitted && form.brand.errors}"/>
+        <div *ngIf="submitted && form.brand.errors" class="invalid-feedback">
+          <div *ngIf="form.brand.errors.required">BrandName is required</div>
+          <div *ngIf="form.brand.errors">BrandName is invalid</div>
+          </div>
       </div>
       <div class="form-group col-md-6">
         <label style="font-family: 'Crimson Text', sans-serif">Product Name</label>
-        <input type="text" class="form-control" formControlName = "productName">
+        <input type="text" class="form-control" formControlName = "productName"[ngClass]="{'is-invalid': submitted && form.productName.errors}"/>
+        <div *ngIf="submitted && form.productName.errors" class="invalid-feedback">
+          <div *ngIf="form.productName.errors.required">Productname is required</div>
+          <div *ngIf="form.productName.errors">Productname is invalid</div>
+          </div>
       </div>
       <div class="form-group col-md-6">
         <label style="font-family: 'Crimson Text', sans-serif">SKU</label>
-        <input type="text" class="form-control" formControlName = "SKU">
+        <input type="text" class="form-control" formControlName = "SKU" [ngClass]="{'is-invalid': submitted && form.SKU.errors}"/>
+        <div *ngIf="submitted && form.SKU.errors" class="invalid-feedback">
+          <div *ngIf="form.SKU.errors.required">SKU is required</div>
+          <div *ngIf="form.SKU.errors">SKU is invalid</div>
+          </div>
       </div>
       <div class="form-group col-md-6">
         <label style="font-family: 'Crimson Text', sans-serif">Category</label>
-        <input type="text" class="form-control" formControlName = "category">
+        <input type="text" class="form-control" formControlName = "category"[ngClass]="{'is-invalid': submitted && form.category.errors}"/>
+        <div *ngIf="submitted && form.category.errors" class="invalid-feedback">
+          <div *ngIf="form.category.errors.required">Category is required</div>
+          <div *ngIf="form.category.errors">Category is invalid</div>
+          </div>
       </div>
       <div class="form-group col-md-6">
         <label for="exampleFormControlSelect1" style="font-family: 'Crimson Text', sans-serif">Product Type</label>
-        <select class="form-control" id="exampleFormControlSelect1" formControlName="type" (change)="changeCategory($event)">
+        <select class="form-control" id="exampleFormControlSelect1" formControlName="type" (change)="changeCategory($event)"[ngClass]="{'is-invalid': submitted && form.type.errors}">
           <option>Select Type</option>
           <option [value]="cat.type_id" *ngFor="let cat of types; index as i">{{cat.name}}</option>
         </select>
+        <div *ngIf="submitted && form.type.errors" class="invalid-feedback">
+          <div *ngIf="form.type.errors.required">Product Type is required</div>
+          <div *ngIf="form.type.errors">Product Type is invalid</div>
+          </div>
       </div>
       <div class="form-group col-md-6">
         <label for="exampleFormControlTextarea1" style="font-family: 'Crimson Text', sans-serif">Product Description</label>
-        <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" formControlName="productDescription"></textarea>
+        <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" formControlName="productDescription"[ngClass]="{'is-invalid': submitted && form.productDescription.errors}"></textarea>
+        <div *ngIf="submitted && form.productDescription.errors" class="invalid-feedback">
+          <div *ngIf="form.productDescription.errors.required">ProductDescription is required</div>
+          <div *ngIf="form.productDescription.errors">ProductDescription is invalid</div>
+          </div>
       </div>
       <div class="form-group col-md-6">
         <label style="font-family: 'Crimson Text', sans-serif">Product Price</label>
-        <input type="text" class="form-control" formControlName = "productPrice">
+        <input type="text" class="form-control" formControlName = "productPrice"[ngClass]="{'is-invalid': submitted && form.productPrice.errors}"/>
+        <div *ngIf="submitted && form.productPrice.errors" class="invalid-feedback">
+          <div *ngIf="form.productPrice.errors.required">Product Price is required</div>
+          <div *ngIf="form.productPrice.errors">Product Price is invalid</div>
+          </div>
       </div>
       <div class="form-group col-md-6">
         <label style="font-family: 'Crimson Text', sans-serif">Product Quantity</label>
-        <input type="text" class="form-control" formControlName = "productQuantity">
+        <input type="text" class="form-control" formControlName = "productQuantity"[ngClass]="{'is-invalid': submitted && form.productQuantity.errors}"/>
+        <div *ngIf="submitted && form.productQuantity.errors" class="invalid-feedback">
+          <div *ngIf="form.productQuantity.errors.required">Product Quantity is required</div>
+          <div *ngIf="form.productQuantity.errors">Product Quantity is invalid</div>
+          </div>
       </div>
       <div class="form-group col-md-6">
         <label style="font-family: 'Crimson Text', sans-serif">Stock</label>
-        <select class="form-control" id="stockId" formControlName="stockStatus" [value]="">
+        <select class="form-control" id="stockId" formControlName="stockStatus" [value]="" [ngClass]="{'is-invalid': submitted && form.stockStatus.errors}">
           <option value="select" selected>Select Stock</option>
           <option *ngFor="let s of stock; let i=index" [value]="s">{{s}}</option>
         </select>
+        <div *ngIf="submitted && form.stockStatus.errors" class="invalid-feedback">
+          <div *ngIf="form.stockStatus.errors.required">Stock Status is required</div>
+          <div *ngIf="form.stockStatus.errors">Stock Status is invalid</div>
+          </div>
       </div>
       <div class="form-check" style="position: relative; left: 1em">
         <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
@@ -83,6 +119,6 @@
 
     </form>
 
-    <button type="submit" class="submit-info" (click)="saveProduct()">Submit</button>
+    <button [disable]="myForm.invalid" type="submit" class="submit-info" (click)="saveProduct()">Submit</button>
   </div>
 </div>
