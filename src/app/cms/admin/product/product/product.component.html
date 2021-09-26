@@ -11,16 +11,16 @@
         <label style="font-family: 'Crimson Text', sans-serif">Brand</label>
         <input type="text" class="form-control" formControlName = "brand" [ngClass]="{'is-invalid': submitted && form.brand.errors}"/>
         <div *ngIf="submitted && form.brand.errors" class="invalid-feedback">
-          <div *ngIf="form.brand.errors.required">BrandName is required</div>
-          <div *ngIf="form.brand.errors">BrandName is invalid</div>
+          <div *ngIf="form.brand.errors.required">Brand Name is required</div>
+          <div *ngIf="form.brand.errors">Brand Name is invalid</div>
           </div>
       </div>
       <div class="form-group col-md-6">
         <label style="font-family: 'Crimson Text', sans-serif">Product Name</label>
         <input type="text" class="form-control" formControlName = "productName"[ngClass]="{'is-invalid': submitted && form.productName.errors}"/>
         <div *ngIf="submitted && form.productName.errors" class="invalid-feedback">
-          <div *ngIf="form.productName.errors.required">Productname is required</div>
-          <div *ngIf="form.productName.errors">Productname is invalid</div>
+          <div *ngIf="form.productName.errors.required">Product Name is required</div>
+          <div *ngIf="form.productName.errors">Product Name is invalid</div>
           </div>
       </div>
       <div class="form-group col-md-6">
@@ -54,8 +54,8 @@
         <label for="exampleFormControlTextarea1" style="font-family: 'Crimson Text', sans-serif">Product Description</label>
         <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" formControlName="productDescription"[ngClass]="{'is-invalid': submitted && form.productDescription.errors}"></textarea>
         <div *ngIf="submitted && form.productDescription.errors" class="invalid-feedback">
-          <div *ngIf="form.productDescription.errors.required">ProductDescription is required</div>
-          <div *ngIf="form.productDescription.errors">ProductDescription is invalid</div>
+          <div *ngIf="form.productDescription.errors.required">Product Description is required</div>
+          <div *ngIf="form.productDescription.errors">Product Description is invalid</div>
           </div>
       </div>
       <div class="form-group col-md-6">
