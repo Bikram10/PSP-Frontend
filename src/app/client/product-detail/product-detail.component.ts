@@ -4,6 +4,8 @@ import {ClientService} from "../../service/client.service";
 import {Type} from "../../cms/admin/model/type";
 import {Product} from "../../cms/admin/model/product";
 import {AdminService} from "../../cms/admin/admin.service";
+import {ActivatedRoute} from "@angular/router";
+import {param} from "jquery";
 
 @Component({
   selector: 'app-product-detail',
@@ -16,7 +18,7 @@ export class ProductDetailComponent implements OnInit {
   types: Type[] = [];
   brands: Array<any> = [];
   product!: Product[];
-  searchProduct: string = '';
+  searchProduct: any;
   min: number = 0;
   max: number = 0;
   start: number = 0;
@@ -28,15 +30,17 @@ export class ProductDetailComponent implements OnInit {
 
   @Output()
   productAdded: EventEmitter<any> = new EventEmitter<any>();
-  constructor(private builder: FormBuilder, private clientService: ClientService) { }
+  constructor(private activatedRoute: ActivatedRoute, private builder: FormBuilder, private clientService: ClientService) { }
 
   ngOnInit(): void {
+    this.searchProduct = this.activatedRoute.snapshot.paramMap.get("searchText");
 
     this.clientService.getAllTypes().subscribe(types => {
       this.types = types;
     });
     this.createForm();
     this.search();
+
   }
   createForm(){
     this.myForm = this.builder.group({
@@ -90,15 +94,5 @@ export class ProductDetailComponent implements OnInit {
     this.searchDetails();
   }
 
-  addCart(product: Product){
-    const productExist = this.cartProductList.find(p => p.product_id === product.product_id);
-
-    if(!productExist){
-      this.cartProductList.push({...product, count: 1});
-      return;
-    }
-    productExist.count +=1;
-    this.productAdded.emit(this.cartProductList);
-  }
 
 }

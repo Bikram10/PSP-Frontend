@@ -51,14 +51,13 @@ export class RegisterComponent implements OnInit {
     this.register.email = this.myForm.controls.email.value;
     this.register.password=this.myForm.controls.password.value;
 
-
-    this.formdata.append('user', new Blob([JSON.stringify(this.register)], {type: 'application/json'}));
+    this.formdata.append('registerUser', new Blob([JSON.stringify(this.register)], {type: 'application/json'}));
 
     this.authService.saveUser(this.formdata).subscribe(res =>{
       this.toastService.success("Successfully Registered, Click Sign to login");
     },
       error => {
-        this.toastService.error("Something wrong with the details");
+        console.error(error)
       })
 
   }

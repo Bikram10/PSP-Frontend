@@ -13,6 +13,14 @@ export class TokenStorageService {
     window.sessionStorage.clear();
   }
 
+  isUserLoggedIn(){
+    let user = sessionStorage.getItem(TOKEN_KEY);
+
+    if(user == null)
+      return false;
+    return true;
+  }
+
   public saveToken(token: string) {
     window.sessionStorage.removeItem(TOKEN_KEY);
     window.sessionStorage.setItem(TOKEN_KEY,  token);

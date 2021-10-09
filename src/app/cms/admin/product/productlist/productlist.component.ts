@@ -1,9 +1,10 @@
-import {AfterViewInit, Component, OnInit, QueryList, ViewChild, ViewChildren} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {AdminService} from "../../admin.service";
 import {Product} from "../../model/product";
 import {FormBuilder, FormGroup} from "@angular/forms";
 import {Filter} from "../../model/filter";
 import {ActivatedRoute, Router} from "@angular/router";
+import {Stock} from "../../model/Stock";
 
 
 @Component({
@@ -21,11 +22,13 @@ export class ProductlistComponent implements OnInit {
   filter: Filter = {
     keyword: ''
   };
+
+  stocks = [{name: Stock.IN_STOCK, value: "In stock"}, {name: Stock.OUT_OF_STOCK, value: "Out of Stock"}, {name: Stock.IN_FEW_DAYS, value: "In Few Days"}]
+
   constructor(private router: Router, private activatedRoute: ActivatedRoute, private adminService: AdminService, private formBuilder: FormBuilder) {
   }
 
   ngOnInit() {
-    let id: any;
     this.getPaging();
     this.createForm();
 
@@ -37,16 +40,11 @@ export class ProductlistComponent implements OnInit {
     })
   }
 
-  listSearch(){
-    this.adminService.getProduct().subscribe(data => {
-      this.products = data;
-    });
-  }
-
   getPaging(){
     this.adminService.getPagingProduct(this.page, this.filter.keyword).subscribe((data: any) =>{
         this.products = data['content'];
         this.pages = new Array(data['totalPages']);
+
     });
 
   }
@@ -71,6 +69,10 @@ export class ProductlistComponent implements OnInit {
     this.getPaging();
   }
 
+  getStock(stock: Stock){
+    return Stock.IN_STOCK === stock;
+  }
+
   next(event: any){
     event.preventDefault();
     this.page++;
@@ -79,7 +81,6 @@ export class ProductlistComponent implements OnInit {
 
   deleteProduct(id: any){
     this.adminService.deleteProduct(id).subscribe(res => {
-      console.log("Item deleted");
       window.location.reload();
     })
   }

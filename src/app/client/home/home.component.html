@@ -11,26 +11,10 @@
   </div>
   <!-- /#sidebar-wrapper -->
   <!-- Page Content -->
-  <div id="page-content-wrapper">
-    <nav class="navbar navbar-expand-lg navbar-light bg-light" style="border-bottom: 1px solid;">
-      <button class="btn btn-primary" id="menu-toggle">
-        <i class="fas fa-bars" style="font-size: 1.5rem"></i>
-      </button>
-      <div class="container-fluid">
-        <div class="col-md-4">
-          <a href="#">Login or Join FREE</a>
-        </div>
-
-        <div class="col-md-4">
-        </div>
-        <div class="col-md-1">
-          <i class="fa fa-cart-plus" style="font-size: 1.5rem;"></i>
-        </div>
-      </div>
-    </nav>
-
-
-    <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+  <div class="page-wrapper">
+    <app-landing-page></app-landing-page>
+    <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel" style="position: relative;
+    top: 0.6em;">
       <ol class="carousel-indicators">
         <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
         <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
@@ -57,60 +41,67 @@
       </a>
     </div>
     <hr>
+  <div class="page-container">
     <label class="col-sm-2 control-label">New Arrivals</label>
-    <div class="row container-fluid">
-      <div class="col-md-3 px-5">
-        <img src="assets/Dell-XPS-13_TA.jpg" class="img-thumbnail img-responsive" alt="Cinque Terre">
-      </div>
-      <div class="col-md-3 px-5">
-        <img src="assets/Dell-XPS-13_TA.jpg" class="img-thumbnail img-responsive" alt="Cinque Terre">
-      </div>
-      <div class="col-md-3 px-5">
-        <img src="assets/Dell-XPS-13_TA.jpg" class="img-thumbnail img-responsive" alt="Cinque Terre">
-      </div>
-      <div class="col-md-3 px-5">
-        <img src="assets/Dell-XPS-13_TA.jpg" class="img-thumbnail img-responsive" alt="Cinque Terre">
-      </div>
-    </div>
-
-    <hr>
-    <label class="col-sm-2 control-label">Clearance Sale</label>
-    <div class="row container-fluid">
-
-      <div class="col-md-3 px-5">
-        <img src="assets/Dell-XPS-13_TA.jpg" class="img-responsive" alt="Cinque Terre">
-      </div>
-      <div class="col-md-3 px-5">
-        <img src="assets/Dell-XPS-13_TA.jpg" class="img-responsive" alt="Cinque Terre">
-      </div>
-      <div class="col-md-3 px-5">
-        <img src="assets/Dell-XPS-13_TA.jpg" class="img-responsive" alt="Cinque Terre">
-      </div>
-      <div class="col-md-3 px-5">
-        <img src="assets/Dell-XPS-13_TA.jpg" class="img-responsive" alt="Cinque Terre">
+    <div class="row" >
+      <div class="col-md-3 col-sm-6" *ngFor="let item of newArrival; let i = index">
+        <div class="product-grid4">
+          <div class="product-image4">
+            <a [routerLink]="['../info', item.product_id]">
+              <img class="pic-1" src="assets/Dell-XPS-13_TA.jpg">
+              <img class="pic-2" src="assets/Dell-XPS-13_TA.jpg">
+            </a>
+          </div>
+          <div class="product-content">
+            <h3 class="title"><a href="#">{{item.product_name}}</a></h3>
+            <div class="price">
+              ${{item.price}}
+            </div>
+          </div>
+        </div>
       </div>
     </div>
-
-    <hr>
+  <hr />
+    <label class="col-sm-2 control-label">Most Viewed Item</label>
+    <div class="row">
+      <div class="col-md-3 col-sm-6" *ngFor="let item of viewedItem; let i = index">
+        <div class="product-grid4">
+          <div class="product-image4">
+            <a href="#">
+              <img class="pic-1" src="assets/Dell-XPS-13_TA.jpg">
+              <img class="pic-2" src="assets/Dell-XPS-13_TA.jpg">
+            </a>
+          </div>
+          <div class="product-content">
+            <h3 class="title"><a href="#">{{item.product_name}}</a></h3>
+            <div class="price">
+              {{item.price}}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+      <hr />
     <label class="col-sm-2 control-label">Explore More Items</label>
-    <div class="container horizontal-scrollable">
-    <div class="row container-fluid">
-      <div class="col-md-3 manik px-5">
-        <img src="assets/Dell-XPS-13_TA.jpg" class="rounded-circle" alt="Cinque Terre" width="150" height="150">
-      </div>
-      <div class="col-md-3 manik px-5">
-        <img src="assets/Dell-XPS-13_TA.jpg" class="rounded-circle" alt="Cinque Terre" width="150" height="150">
-      </div>
-      <div class="col-md-3 manik px-5">
-        <img src="assets/Dell-XPS-13_TA.jpg" class="rounded-circle" alt="Cinque Terre" width="150" height="150">
-      </div>
-      <div class="col-md-3 manik px-5">
-        <img src="assets/Dell-XPS-13_TA.jpg" class="rounded-circle" alt="Cinque Terre" width="150" height="150">
-      </div>
-    </div>
-    </div>
-    <hr>
-  </div>
+
+    <div class="row">
+        <div class="col-md-3 col-sm-6" *ngFor="let type of types; let i = index">
+          <div class="product-grid4">
+            <div class="product-image4">
+              <a href="#">
+                <img class="pic-1" src="assets/Dell-XPS-13_TA.jpg">
+                <img class="pic-2" src="assets/Dell-XPS-13_TA.jpg">
+              </a>
+            </div>
+            <div class="product-content">
+              <h3 class="title"><a href="#">{{type.name}}</a></h3>
+            </div>
+          </div>
+        </div>
   <!-- /#page-content-wrapper -->
 </div>
+    <app-footer></app-footer>
 <!-- /#wrapper -->
+  </div>
+</div>
+</div>

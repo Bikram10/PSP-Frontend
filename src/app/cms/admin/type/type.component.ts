@@ -105,6 +105,7 @@ export class TypeComponent implements OnInit {
   onSubmit(){
     this.type.name = this.myForm.controls.name.value;
 
+
     this.formData.append('category', new Blob([JSON.stringify(this.type)],{ type: "application/json"}));
 
     this.formData.append('file', this.files[0]);

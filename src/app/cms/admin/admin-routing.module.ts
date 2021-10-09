@@ -10,6 +10,7 @@ import {RegisterComponent} from "./register/register/register.component";
 import {CsvComponent} from "./product/csv/csv/csv.component";
 
 export const routes: Routes = [
+    {path: 'login', component: LoginComponent},
     {path: 'register', component: RegisterComponent},
     {path: 'category', component: TypeComponent},
     {path: 'product', component: ProductComponent},

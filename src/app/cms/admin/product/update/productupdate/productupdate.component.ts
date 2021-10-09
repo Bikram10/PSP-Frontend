@@ -8,6 +8,7 @@ import {Attributes} from "../../../model/attributes";
 import {createAttribute} from "@angular/compiler/src/core";
 import {AdminService} from "../../../admin.service";
 import {ToastrService} from "ngx-toastr";
+import {Stock} from "../../../model/Stock";
 
 @Component({
   selector: 'app-productupdate',
@@ -23,7 +24,9 @@ export class ProductupdateComponent implements OnInit {
   files: any[] = [];
   types: Type[] = [];
   type_name: string = '';
+  stock_name?: Stock;
   formData: FormData = new FormData();
+  imageUrl: string = '';
 
   constructor(private toast: ToastrService, private adminService: AdminService, private activateRoute: ActivatedRoute, private updateService: ProductupdateService, private formBuilder: FormBuilder) { }
 
@@ -41,6 +44,8 @@ export class ProductupdateComponent implements OnInit {
     })
     this.updateService.getProduct(id).subscribe(product => {
       this.type_name = product.type.name;
+      this.stock_name = product.stockStatus;
+      this.imageUrl = "https://res.cloudinary.com/dwoyu3cxt/image/upload/c_scale,w_150/v1632795407/"+product.product_img_url;
       this.myForm.patchValue(product);
     })
 
@@ -63,13 +68,13 @@ export class ProductupdateComponent implements OnInit {
     this.myForm = this.formBuilder.group({
       brand: [''],
       product_name: [''],
-      SKU: [''],
+      sku: [''],
       category: [''],
       type: [''],
       description: [''],
       price: [''],
       quantity: [''],
-      stock_status: [''],
+      stockStatus: [''],
     });
   }
 
@@ -162,14 +167,14 @@ export class ProductupdateComponent implements OnInit {
 
   update(){
     this.product.brand = this.myForm.controls.brand.value;
-    this.product.SKU = this.myForm.controls.SKU.value;
+    this.product.sku = this.myForm.controls.SKU.value;
     this.product.category = this.myForm.controls.category.value;
     this.product.type = this.myForm.controls.type.value;
     this.product.product_name = this.myForm.controls.product_name.value;
     this.product.description = this.myForm.controls.description.value;
     this.product.price = this.myForm.controls.price.value;
     this.product.quantity = this.myForm.controls.quantity.value;
-    this.product.stock_status = this.myForm.controls.stock_status.value;
+    this.product.stockStatus = this.myForm.controls.stock_status.value;
 
 
     this.formData.append("product", new Blob([JSON.stringify(this.product)], {type: 'application/json'}));

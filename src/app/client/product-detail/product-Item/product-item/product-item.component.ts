@@ -13,20 +13,15 @@ export class ProductItemComponent implements OnInit {
 
   @Input()
   product: Product = {};
-  item: CartItem = {};
+  item: CartItem = {
+    quantity: 0
+  };
   quantity: number = 1;
 
   form!: FormGroup;
   constructor(private clientService: ClientService, private builder: FormBuilder) { }
 
   ngOnInit(): void {
-    this.createForm();
-  }
-
-  createForm(){
-    this.form = this.builder.group({
-      quantity: ['']
-    })
   }
 
   addCart(){

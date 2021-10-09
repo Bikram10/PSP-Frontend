@@ -4,6 +4,7 @@ import {FormArray, FormBuilder, FormControl, FormGroup, Validators} from "@angul
 import {AdminService} from "../../admin.service";
 import {Type} from "../../model/type";
 import {Toast, ToastrService} from "ngx-toastr";
+import {Stock} from "../../model/Stock";
 
 @Component({
   selector: 'app-product',
@@ -16,7 +17,7 @@ export class ProductComponent implements OnInit {
   product: Product = {};
   myForm!: FormGroup;
   types: Type[] = [];
-  stock: string[] = ['IN STOCK', 'OUT OF STOCK'];
+  stock: string[] = ['IN STOCK', 'OUT OF STOCK', 'IN FEW DAYS'];
 
   submitted: boolean = false;
 
@@ -112,6 +113,13 @@ export class ProductComponent implements OnInit {
     this.product.type = temp;
   }
 
+  changeStock(event: any){
+    let temp: Stock;
+
+    temp = event.target.value;
+    this.product.stockStatus = temp;
+  }
+
   createProductForm(){
     this.myForm = this.builder.group({
       productName: ['', Validators.required],
@@ -127,32 +135,15 @@ export class ProductComponent implements OnInit {
     });
   }
 
-  get attributeForm(){
-    return this.myForm.get('attributes') as FormArray;
-  }
-
-  createAttribute(): FormGroup{
-    let group: FormGroup = this.builder.group({
-      attributeType: new FormControl('Select Type'),
-      attributeName: new FormControl('')
-    });
-
-    return group;
-  }
-  removeAttribute(attributeIndex: number){
-    const control = <FormArray>this.myForm.controls['attributes'];
-    control.removeAt(attributeIndex);
-  }
-
   saveProduct(){
     this.submitted = true;
     this.product.brand = this.myForm.controls.brand.value;
-    this.product.SKU = this.myForm.controls.SKU.value;
+    this.product.sku = this.myForm.controls.SKU.value;
     this.product.product_name = this.myForm.controls.productName.value;
     this.product.description = this.myForm.controls.productDescription.value;
     this.product.price = this.myForm.controls.productPrice.value;
     this.product.quantity = this.myForm.controls.productQuantity.value;
-    this.product.stock_status = this.myForm.controls.stockStatus.value;
+    this.product.stockStatus = this.myForm.controls.stockStatus.value;
 
 
     this.formData.append('product', new Blob([JSON.stringify(this.product)], {type: 'application/json'}));

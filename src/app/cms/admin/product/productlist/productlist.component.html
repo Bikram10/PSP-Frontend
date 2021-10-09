@@ -6,7 +6,7 @@
   </div>
   <form [formGroup]="myForm">
     <div class="form-group">
-      <label style="font-family: 'Crimson Text', sans-serif">Brand</label>
+      <label style="font-family: 'Crimson Text', sans-serif">Search Product</label>
       <input type="text" class="form-control col-sm-2" formControlName="keyword"  [(ngModel)]="filter.keyword" (input)="getPaging()"/>
     </div>
   </form>
@@ -16,7 +16,7 @@
       <table class="table table-centered table-hover mb-0" id="datatable">
         <thead>
         <tr>
-          <th class="border-top-0" scope="col" (click)="getPaging()"><span>ID</span><i class="fas fa-sort"></i></th>
+          <th class="border-top-0" scope="col"><span>ID</span></th>
           <th class="border-top-0" scope="col" sortable="title">IMAGE</th>
           <th class="border-top-0" scope="col" sortable="text">PRODUCT NAME</th>
           <th class="border-top-0" scope="col" sortable="text">BRAND</th>
@@ -33,16 +33,16 @@
         <tbody>
         <tr *ngFor="let product of products; let i=index">
           <td>{{product.product_id}}</td>
-          <td></td>
+          <td><img [src]="'https://res.cloudinary.com/dwoyu3cxt/image/upload/c_scale,w_150/v1632795407/product/'+product.sku+'/0.jpg'" /></td>
           <td>{{product.product_name}}</td>
           <td>{{product.brand}}</td>
-          <td>{{product.SKU}}</td>
+          <td>{{product.sku}}</td>
           <td>{{product.type?.name}}</td>
           <td>{{product.category}}</td>
           <td>{{product.price}}</td>
           <td>{{product.description}}</td>
           <td>{{product.quantity}}</td>
-          <td>{{product.stock_status}}</td>
+          <td>{{product.stockStatus}}</td>
           <td style="white-space: nowrap">
             <a class="btn btn-secondary" [routerLink]="['../edit', product.product_id]">Edit</a>&nbsp;
             <button class="btn btn-danger" (click)="deleteProduct(product.product_id)">Delete</button>

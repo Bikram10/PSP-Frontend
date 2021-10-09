@@ -17,21 +17,13 @@
         <label for="fileDropRef">Browse for file</label>
       </div>
       <div class="files-list" *ngIf="progress > 0">
-        <div class="single-file">
+        <div class="single-file" *ngFor="let file of files; let i = index">
           <img src="assets/dnd/ic-file.svg" width="45px" alt="file">
           <div class="info">
             <h4 class="name">
-              {{ files[0]?.name }}
+              {{ file?.name }}
             </h4>
-            <div
-              class="progress-bar progress-bar-info progress-bar-striped"
-              role="progressbar"
-              attr.aria-valuenow="{{ progress }}"
-              aria-valuemin="0"
-              aria-valuemax="100"
-              [ngStyle]="{ width: progress + '%' }">
-              {{ progress }}%
-            </div>
+            <app-progress [progress]="progress"></app-progress>
           </div>
           <img src="assets/dnd/ic-delete-file.svg" class="delete" width="20px" alt="file">
         </div>

@@ -4,6 +4,8 @@ import {environment} from "../../environments/environment";
 import {HttpClient} from "@angular/common/http";
 import {Constants} from "../shared/constants";
 import {Observable} from "rxjs";
+import {CartItem} from "../client/model/cartItem";
+import {FormGroup} from "@angular/forms";
 
 @Injectable({
   providedIn: 'root'
@@ -14,13 +16,13 @@ export class StripeServiceService {
   stripePromise = loadStripe(environment.stripe);
   constructor(private http: HttpClient) { }
 
-  async pay(): Promise<void> {
+  async pay(total: number): Promise<void> {
     // here we create a payment object
     const payment = {
-      name: 'Iphone',
-      currency: 'usd',
+      name: 'Your Items',
+      currency: 'Aud',
       // amount on cents *10 => to be on dollar
-      amount: 99900,
+      amount: total * 100,
       quantity: '1',
       cancelUrl: 'http://localhost:4200/cancel',
       successUrl: 'http://localhost:4200/success',

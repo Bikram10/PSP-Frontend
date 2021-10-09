@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import {HttpClient} from "@angular/common/http";
+import {HttpClient, HttpEvent} from "@angular/common/http";
 import {Constants} from "../../shared/constants";
 import {Observable} from "rxjs";
 import {Type} from "./model/type";
@@ -53,9 +53,10 @@ export class AdminService {
 
   }
 
-  uploadProductCSV(formData: FormData): Observable<any>{
+  uploadProductCSV(formData: FormData): Observable<HttpEvent<any>>{
     return this.http.post<any>(this.baseUrl+"/productApi/upload", formData, {
       reportProgress: true,
+      observe: "events",
       responseType: 'json'
     });
   }

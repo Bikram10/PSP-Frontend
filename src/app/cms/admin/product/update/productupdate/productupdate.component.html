@@ -18,7 +18,7 @@
       </div>
       <div class="form-group col-md-6">
         <label style="font-family: 'Crimson Text', sans-serif">SKU</label>
-        <input type="text" class="form-control" formControlName = "SKU">
+        <input type="text" class="form-control" formControlName = "sku">
       </div>
       <div class="form-group col-md-6">
         <label style="font-family: 'Crimson Text', sans-serif">Category</label>
@@ -27,7 +27,7 @@
         <div class="col-md-6">
           <label for="exampleFormControlSelect1" style="font-family: 'Crimson Text', sans-serif">Product Type</label>
           <select class="form-control" id="exampleFormControlSelect1" formControlName="type"  (change)="changeCategory($event)" [value]="type_name">
-            <option  *ngFor="let cat of types; index as i" [value]="cat.name">{{cat.name}}</option>
+            <option  *ngFor="let type of types; index as i" [value]="type.name">{{type.name}}</option>
             <option></option>
           </select>
         </div>
@@ -46,10 +46,8 @@
       </div>
       <div class="form-group col-md-6">
         <label style="font-family: 'Crimson Text', sans-serif">Stock Status</label>
-        <select class="form-control" id="stockId" formControlName="stock_status">
-          <option>Select Type</option>
-          <option value="In Stock">IN STOCK</option>
-          <option value="Out of Order">OUT OF ORDER</option>
+        <select class="form-control" id="stockId" formControlName="stockStatus" [value]="stock_name">
+          <option [value]="stock_name">{{stock_name}}</option>
         </select>
       </div>
       <div class="form-group col-md-6">
@@ -75,6 +73,9 @@
             </div>
             <img src="assets/dnd/ic-delete-file.svg" class="delete" width="20px" alt="file" (click)="deleteFile(i)">
           </div>
+        </div>
+        <div class="image-thumbnail">
+          <img src="{{imageUrl}}" />
         </div>
       </div>
     </form>

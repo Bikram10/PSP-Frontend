@@ -1,4 +1,4 @@
-import { CanActivate } from "@angular/router";
+import {CanActivate, RouterStateSnapshot} from "@angular/router";
 import { Injectable } from "@angular/core";
 import { ActivatedRouteSnapshot } from "@angular/router";
 import { JwtHelperService } from "@auth0/angular-jwt";
@@ -11,11 +11,11 @@ export class RoleGuardService implements CanActivate {
 
   constructor(private helper: JwtHelperService, private router: Router, private token: TokenStorageService){}
 
-  canActivate(route: ActivatedRouteSnapshot): boolean {
+  canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
     const token = this.token.getToken();
 
     if(!token){
-      this.router.navigate(['/']);
+      this.router.navigate(['/'], {queryParams: {returnUrl: state.url}});
       return false;
     }
     const tokenPayload = this.helper.decodeToken(token);

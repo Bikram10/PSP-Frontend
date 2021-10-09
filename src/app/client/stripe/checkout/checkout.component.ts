@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {StripeServiceService} from "../../../service/stripe-service.service";
+import {FormBuilder, FormGroup} from "@angular/forms";
 
 @Component({
   selector: 'app-checkout',
@@ -8,14 +9,26 @@ import {StripeServiceService} from "../../../service/stripe-service.service";
 })
 export class CheckoutComponent implements OnInit {
 
-  constructor(private stripeService: StripeServiceService) { }
+  myForm!: FormGroup;
+
+  constructor(private builder: FormBuilder,private stripeService: StripeServiceService) { }
 
 
   ngOnInit(): void {
+    this.createForm();
+  }
+
+  createForm(){
+    this.myForm = this.builder.group({
+      name: [''],
+      cardNumber: [''],
+      expMonth: [''],
+      expYear: [''],
+      cvv: ['']
+    })
   }
 
   pay(){
-    this.stripeService.pay();
   }
 
 }

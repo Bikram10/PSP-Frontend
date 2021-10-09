@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {AuthenticationService} from "../../../../service/authentication.service";
-import {Router} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 import {TokenStorageService} from "../../../../service/token-storage.service";
 import {JwtHelperService} from "@auth0/angular-jwt";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
@@ -14,11 +14,13 @@ import {Toast, ToastrService} from "ngx-toastr";
 export class LoginComponent implements OnInit {
 
   myForm!: FormGroup;
+  returnUrl: string = '';
 
-  constructor(private toast: ToastrService, private formBuilder: FormBuilder, private router: Router, private authService: AuthenticationService, private token: TokenStorageService, private helper: JwtHelperService) {
+  constructor(private route: ActivatedRoute, private toast: ToastrService, private formBuilder: FormBuilder, private router: Router, private authService: AuthenticationService, private token: TokenStorageService, private helper: JwtHelperService) {
   }
 
   ngOnInit(): void {
+    this.returnUrl = this.route.snapshot.queryParams['returnUrl'];
     this.createLoginForm();
   }
 
@@ -42,19 +44,18 @@ export class LoginComponent implements OnInit {
         const tokenPayload = this.helper.decodeToken(data.token);
 
         if(tokenPayload.scopes === "ROLE_ADMIN"){
-          this.router.navigate(['dashboard']);
+          this.toast.success("Successfully authenticated");
+          this.router.navigate([this.returnUrl || 'dashboard']);
         } else if (tokenPayload.scopes === "ROLE_USER") {
-          this.router.navigate(['landing-page']);
+          this.toast.success("Successfully authenticated");
+          this.router.navigate([this.returnUrl || 'landing-page']);
+
         } else {
           this.router.navigate(['/']);
         }
       },
       next =>{
         this.toast.error("Invalid Username or Password")
-      },
-      () => {
-        this.toast.success("Succuessfully authenticated!");
-
       }
     );
   }
