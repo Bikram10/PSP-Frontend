@@ -11,6 +11,7 @@ import {AdminService} from "../admin.service";
 export class TypeComponent implements OnInit {
 
   myForm!: FormGroup;
+  submitted = false;
   @ViewChild("fileDropRef", { static: false }) fileDropEl!: ElementRef;
   files: any[] = [];
   formData: FormData = new FormData();
@@ -23,12 +24,18 @@ export class TypeComponent implements OnInit {
     this.createCategory();
   }
 
+
   createCategory(){
     this.myForm = this.formBuilder.group({
       name: [''],
     });
 
   }
+
+  get form(){
+    return this.myForm.controls;
+  }
+
   onFileDropped(event: any) {
     this.prepareFilesList(event);
   }
@@ -103,6 +110,7 @@ export class TypeComponent implements OnInit {
   }
 
   onSubmit(){
+    this.submitted = true;
     this.type.name = this.myForm.controls.name.value;
 
     this.formData.append('category', new Blob([JSON.stringify(this.type)],{ type: "application/json"}));

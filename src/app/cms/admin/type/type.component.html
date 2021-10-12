@@ -11,8 +11,12 @@
       <form [formGroup]="myForm" >
           <div class="form-group col-md-6">
           <label style="font-family: 'Crimson Text', sans-serif">Type Name</label>
-          <input type="text" class="form-control" formControlName = "name">
-          </div>
+          <input type="text" class="form-control" formControlName = "name"[ngClass]="{'is-invalid': submitted && form.name.errors}"/>
+          <div *ngIf="submitted && form.name.errors" class="invalid-feedback">
+            <div *ngIf="form.name.errors.required">Type Name is required</div>
+            <div *ngIf="form.name.errors">Type Name is invalid</div>
+            </div>
+        </div>
         <div class="form-group col-md-6">
           <label style="font-family: 'Crimson Text', sans-serif;">Type Image</label>
           <div class="drag-container col-md-6" appDnd (fileDropped)="onFileDropped($event)">

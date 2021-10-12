@@ -15,6 +15,7 @@ export class LoginComponent implements OnInit {
 
   myForm!: FormGroup;
 
+  submitted = false;
   constructor(private toast: ToastrService, private formBuilder: FormBuilder, private router: Router, private authService: AuthenticationService, private token: TokenStorageService, private helper: JwtHelperService) {
   }
 
@@ -34,6 +35,7 @@ export class LoginComponent implements OnInit {
   }
 
   login(): void {
+    this.submitted = true;
     this.authService.attemptAuth(this.loginDetails.email.value, this.loginDetails.password.value).subscribe(
       data => {
         this.token.saveToken(data.token);
