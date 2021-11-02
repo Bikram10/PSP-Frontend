@@ -1,4 +1,6 @@
 import { Injectable } from '@angular/core';
+import {ClientService} from "./client.service";
+import {HomeService} from "./home.service";
 
 
 const TOKEN_KEY = 'AuthToken';
@@ -6,7 +8,7 @@ const TOKEN_KEY = 'AuthToken';
 @Injectable()
 export class TokenStorageService {
 
-  constructor() { }
+  constructor(private clientService: HomeService) { }
 
   signOut() {
     window.sessionStorage.removeItem(TOKEN_KEY);
@@ -15,7 +17,6 @@ export class TokenStorageService {
 
   isUserLoggedIn(){
     let user = sessionStorage.getItem(TOKEN_KEY);
-
     if(user == null)
       return false;
     return true;

@@ -1,0 +1,33 @@
+<div class="thankyou-page">
+  <div class="_header">
+    <div class="logo">
+      <img src="https://codexcourier.com/images/banner-logo.png" alt="">
+    </div>
+    <h1>Thank You!</h1>
+  </div>
+  <div class="_body">
+    <div class="_box" *ngIf="show">
+      <h2>
+        We received a request to reset the password of your account that is associated with you email account
+      </h2>
+      <p>
+        If you made this request, please click the button below to securely reset your password
+      </p>
+      <div class="form-group col-md-2" style="padding-left: 0">
+        <button class="btn btn-lg btn-primary btn-block " style="background: #c0392b; border:none;" (click)="reset()">Reset Password</button>
+        <button class="btn btn-lg btn-primary btn-block " style="background: #c0392b; border:none;" (click)="back()">Back to Login</button>
+      </div>
+    </div>
+    <div class="_box" *ngIf="!show">
+      <h2>
+        Your token is expired
+      </h2>
+      <p>
+        Please request again to reset your password
+      </p>
+      <div class="form-group col-md-2" style="padding-left: 0">
+      <button class="btn btn-lg btn-primary btn-block " style="background: #c0392b; border:none;" (click)="back()">Back to Login</button>
+      </div>
+    </div>
+  </div>
+</div>

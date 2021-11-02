@@ -1,4 +1,3 @@
-<app-dashboard></app-dashboard>
 <div class="container-fluid" id="wrapper">
   <div id="header">
     <h3>Add Product</h3>
@@ -10,10 +9,10 @@
     <div class="form-group col-md-6">
       <label style="font-family: 'Crimson Text', sans-serif;">Product Image</label>
       <div class="drag-container" csvDrop (filesChangeEmiter)="onFileChange($event)">
-        <input type="file"  id="fileDropRef" (change)="onFileChange($event.target)" />
+        <input type="file"  id="fileDropRef" #fileDropRef (change)="onFileChange($event.target)" accept=".csv"/>
         <img src="assets/dnd/ic-upload-file.svg" alt="">
-        <h3>Drag and drop file here</h3>
-        <h3>or</h3>
+        <h3>Upload the file here</h3>
+        <h3></h3>
         <label for="fileDropRef">Browse for file</label>
       </div>
       <div class="files-list" *ngIf="progress > 0">

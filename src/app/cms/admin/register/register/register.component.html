@@ -1,7 +1,10 @@
 <body>
-<h3 class="text-center text-white pt-5" style="position: relative; font-size: 20px; top: 1em">Create Account</h3>
 <form [formGroup]="myForm">
-<div class="container card col-md-4">
+  <img class="center" src="assets/logo/logo.png" alt="logo" width="150" [routerLink]="['/']" style="cursor: pointer"/>
+
+  <div class="container card col-md-4">
+  <h3 class="text-dark" style="position: relative; font-size: 20px;">Create Account</h3>
+
   <div class="container">
     <p>Username</p>
     <input placeholder="Name" class="inputs" id="username" type="text" formControlName="username" [ngClass]="{'is-invalid': submitted && form.username.errors}"/>

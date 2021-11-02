@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {TokenStorageService} from "../../../service/token-storage.service";
-import {Router} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 
 @Component({
   selector: 'app-dashboard',
@@ -10,7 +10,7 @@ import {Router} from "@angular/router";
 export class DashboardComponent implements OnInit {
 
 
-  constructor(private router: Router, private tokenService: TokenStorageService) { }
+  constructor(private router: Router, private tokenService: TokenStorageService, private route: ActivatedRoute) { }
 
   ngOnInit(): void {
   }
@@ -19,5 +19,24 @@ export class DashboardComponent implements OnInit {
     this.tokenService.signOut();
     this.router.navigate(["/"]);
   }
+
+  showCategory(){
+    this.router.navigate(['category'], {relativeTo: this.route});
+  }
+
+  showProduct(){
+    this.router.navigate(['csv'], {relativeTo: this.route});
+  }
+
+  showList(){
+    this.router.navigate(['listProduct'], {relativeTo: this.route});
+
+  }
+
+  showOrder(){
+    this.router.navigate(['orderList'], {relativeTo: this.route});
+
+  }
+
 
 }

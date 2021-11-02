@@ -15,7 +15,7 @@ export class RoleGuardService implements CanActivate {
     const token = this.token.getToken();
 
     if(!token){
-      this.router.navigate(['/'], {queryParams: {returnUrl: state.url}});
+      this.router.navigate(['/']);
       return false;
     }
     const tokenPayload = this.helper.decodeToken(token);

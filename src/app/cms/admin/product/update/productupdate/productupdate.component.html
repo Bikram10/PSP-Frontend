@@ -1,5 +1,3 @@
-<script src="productupdate.component.ts"></script>
-<app-dashboard></app-dashboard>
 <div class="container-fluid" id="wrapper">
   <div id="header">
     <h3>Add Product</h3>
@@ -26,12 +24,15 @@
       </div>
         <div class="col-md-6">
           <label for="exampleFormControlSelect1" style="font-family: 'Crimson Text', sans-serif">Product Type</label>
-          <select class="form-control" id="exampleFormControlSelect1" formControlName="type"  (change)="changeCategory($event)" [value]="type_name">
+          <select class="form-control" id="exampleFormControlSelect1" formControlName="type"  (change)="changeCategory($event)" [ngModel]="type_name">
             <option  *ngFor="let type of types; index as i" [value]="type.name">{{type.name}}</option>
             <option></option>
           </select>
         </div>
-
+      <div class="form-group col-md-6">
+        <label for="exampleFormControlTextarea1" style="font-family: 'Crimson Text', sans-serif">Short Description</label>
+        <textarea class="form-control" id="exampleFormControlTextarea2" rows="3" formControlName="short_description"></textarea>
+      </div>
       <div class="form-group col-md-6">
         <label for="exampleFormControlTextarea1" style="font-family: 'Crimson Text', sans-serif">Product Description</label>
         <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" formControlName="description"></textarea>
@@ -75,7 +76,11 @@
           </div>
         </div>
         <div class="image-thumbnail">
-          <img src="{{imageUrl}}" />
+          <div class="row">
+            <div class="col-md-3"  *ngFor="let url of imageUrls; let i=index">
+              <img [src]="'https://res.cloudinary.com/dwoyu3cxt/image/upload/c_scale,w_150/v1633752720/'+url.url" />
+            </div>
+          </div>
         </div>
       </div>
     </form>

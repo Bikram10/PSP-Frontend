@@ -25,7 +25,7 @@ export class StripeServiceService {
       amount: total * 100,
       quantity: '1',
       cancelUrl: 'http://localhost:4200/cancel',
-      successUrl: 'http://localhost:4200/success',
+      successUrl: 'http://localhost:4200/orderHistory',
     };
 
     const stripe = await this.stripePromise;

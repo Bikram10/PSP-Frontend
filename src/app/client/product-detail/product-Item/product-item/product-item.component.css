@@ -29,3 +29,21 @@
   height: 1em;
   overflow: hidden;
 }
+.rating-list {
+  display: inline-block;
+  list-style: none;
+  float: left;
+}
+.rate{
+  position: relative;
+  bottom: 0.5em;
+}
+.rating-list li {
+  color: #ddd;
+  padding: 10px 5px;
+
+}
+
+.rating-list li:hover ~ li, .rating-list li.selected {
+  color: #ffd700;
+}

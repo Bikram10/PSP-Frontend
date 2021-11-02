@@ -9,6 +9,7 @@ import {createAttribute} from "@angular/compiler/src/core";
 import {AdminService} from "../../../admin.service";
 import {ToastrService} from "ngx-toastr";
 import {Stock} from "../../../model/Stock";
+import {ImageUrls} from "../../../model/ImageUrls";
 
 @Component({
   selector: 'app-productupdate',
@@ -26,26 +27,27 @@ export class ProductupdateComponent implements OnInit {
   type_name: string = '';
   stock_name?: Stock;
   formData: FormData = new FormData();
-  imageUrl: string = '';
+  imageUrls: ImageUrls[] = [];
+  id: any = 0;
 
   constructor(private toast: ToastrService, private adminService: AdminService, private activateRoute: ActivatedRoute, private updateService: ProductupdateService, private formBuilder: FormBuilder) { }
 
 
 
   ngOnInit(): void {
-    let id!: number;
     this.activateRoute.params.subscribe(paramId => {
-      id = paramId.id;
+      this.id = paramId.id;
     })
     this.createForm();
 
     this.adminService.getCategory().subscribe(types => {
         this.types = types;
     })
-    this.updateService.getProduct(id).subscribe(product => {
+    this.updateService.getProduct(this.id).subscribe(product => {
+
       this.type_name = product.type.name;
       this.stock_name = product.stockStatus;
-      this.imageUrl = "https://res.cloudinary.com/dwoyu3cxt/image/upload/c_scale,w_150/v1632795407/"+product.product_img_url;
+      this.imageUrls = product.product_img_url;
       this.myForm.patchValue(product);
     })
 
@@ -72,28 +74,11 @@ export class ProductupdateComponent implements OnInit {
       category: [''],
       type: [''],
       description: [''],
+      short_description: [''],
       price: [''],
       quantity: [''],
       stockStatus: [''],
     });
-  }
-
-  createAttribute(attribute?: Attributes): FormGroup{
-    let id = null;
-    let attributeName = attribute ? attribute.attributeName : '';
-    let  attributeType = attribute ? attribute.attributeType : '';
-
-    let group: FormGroup = this.formBuilder.group({
-      id: new FormControl(id),
-      attributeType: new FormControl(attributeType),
-      attributeName: new FormControl(attributeName)
-    });
-
-    return group;
-  }
-  removeAttribute(attributeIndex: number){
-    const control = <FormArray>this.myForm.controls['attributes'];
-    control.removeAt(attributeIndex);
   }
 
   onFileDropped(event: any) {
@@ -166,19 +151,27 @@ export class ProductupdateComponent implements OnInit {
   }
 
   update(){
+    this.product.product_id = this.id;
     this.product.brand = this.myForm.controls.brand.value;
-    this.product.sku = this.myForm.controls.SKU.value;
+    this.product.sku = this.myForm.controls.sku.value;
     this.product.category = this.myForm.controls.category.value;
     this.product.type = this.myForm.controls.type.value;
     this.product.product_name = this.myForm.controls.product_name.value;
+    this.product.product_img_url = this.imageUrls;
+    this.product.short_description = this.myForm.controls.short_description.value;
     this.product.description = this.myForm.controls.description.value;
     this.product.price = this.myForm.controls.price.value;
     this.product.quantity = this.myForm.controls.quantity.value;
-    this.product.stockStatus = this.myForm.controls.stock_status.value;
+    this.product.stockStatus = this.myForm.controls.stockStatus.value;
+
 
 
     this.formData.append("product", new Blob([JSON.stringify(this.product)], {type: 'application/json'}));
-    this.formData.append("file", this.files[0]);
+    if(this.files.length !=0) {
+      for (let file of this.files) {
+        this.formData.append("file[]", file);
+      }
+    }
     this.updateService.updateProduct(this.formData).subscribe(
       res =>{
         this.toast.show("Product added successfully");

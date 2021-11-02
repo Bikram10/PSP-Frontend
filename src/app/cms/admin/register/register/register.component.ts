@@ -17,6 +17,7 @@ export class RegisterComponent implements OnInit {
   register: Register = {};
   submitted = false;
   formdata: FormData = new FormData();
+  errorMsg: string = '';
   constructor(private toastService: ToastrService, private authService: AuthenticationService, private builder: FormBuilder) { }
 
   ngOnInit(): void {
@@ -54,7 +55,12 @@ export class RegisterComponent implements OnInit {
     this.formdata.append('registerUser', new Blob([JSON.stringify(this.register)], {type: 'application/json'}));
 
     this.authService.saveUser(this.formdata).subscribe(res =>{
-      this.toastService.success("Successfully Registered, Click Sign to login");
+      if(res.error){
+        this.errorMsg = "There is an email"
+      }
+      else{
+        console.log("success");
+      }
     },
       error => {
         console.error(error)

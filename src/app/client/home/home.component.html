@@ -1,20 +1,4 @@
-<div class="d-flex" id="wrapper">
-  <!-- Sidebar -->
-  <div class="bg-light border-right" id="sidebar-wrapper">
-    <div class="sidebar-heading">PSP Technology </div>
-    <div class="list-group list-group-flush">
-      <a routerLink="/index" class="list-group-item list-group-item-action bg-light">Home</a>
-      <a routerLink="/about" class="list-group-item list-group-item-action bg-light">About US</a>
-      <a routerLink="#" class="list-group-item list-group-item-action bg-light">Categories</a>
-      <a routerLink="/contact" class="list-group-item list-group-item-action bg-light">Contact US</a>
-    </div>
-  </div>
-  <!-- /#sidebar-wrapper -->
-  <!-- Page Content -->
-  <div class="page-wrapper">
-    <app-landing-page></app-landing-page>
-    <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel" style="position: relative;
-    top: 0.6em;">
+    <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
       <ol class="carousel-indicators">
         <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
         <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
@@ -48,8 +32,8 @@
         <div class="product-grid4">
           <div class="product-image4">
             <a [routerLink]="['../info', item.product_id]">
-              <img class="pic-1" src="assets/Dell-XPS-13_TA.jpg">
-              <img class="pic-2" src="assets/Dell-XPS-13_TA.jpg">
+              <img class="pic-1" [src]="'https://res.cloudinary.com/dwoyu3cxt/image/upload/v1635216472/product/'+item.sku+'/0.jpg'" />
+              <img class="pic-2" [src]="'https://res.cloudinary.com/dwoyu3cxt/image/upload/c_scale,w_150/v1632795407/product/'+item.sku+'/0.jpg'" />
             </a>
           </div>
           <div class="product-content">
@@ -68,14 +52,14 @@
         <div class="product-grid4">
           <div class="product-image4">
             <a href="#">
-              <img class="pic-1" src="assets/Dell-XPS-13_TA.jpg">
-              <img class="pic-2" src="assets/Dell-XPS-13_TA.jpg">
+              <img class="pic-1" [src]="'https://res.cloudinary.com/dwoyu3cxt/image/upload/c_scale,w_150/v1632795407/product/'+item.sku+'/0.jpg'" />
+              <img class="pic-2" [src]="'https://res.cloudinary.com/dwoyu3cxt/image/upload/c_scale,w_150/v1632795407/product/'+item.sku+'/0.jpg'" />
             </a>
           </div>
           <div class="product-content">
             <h3 class="title"><a href="#">{{item.product_name}}</a></h3>
             <div class="price">
-              {{item.price}}
+              ${{item.price}}
             </div>
           </div>
         </div>
@@ -88,9 +72,9 @@
         <div class="col-md-3 col-sm-6" *ngFor="let type of types; let i = index">
           <div class="product-grid4">
             <div class="product-image4">
-              <a href="#">
-                <img class="pic-1" src="assets/Dell-XPS-13_TA.jpg">
-                <img class="pic-2" src="assets/Dell-XPS-13_TA.jpg">
+              <a [routerLink]="['../items', type.type_id]">
+                <img class="pic-1" [src]="'https://res.cloudinary.com/dwoyu3cxt/image/upload/c_scale,w_150/v1632795407/'+type.type_img_url+'.jpg'" />
+                <img class="pic-2" [src]="'https://res.cloudinary.com/dwoyu3cxt/image/upload/c_scale,w_150/v1632795407/product/'+type.type_img_url+'.jpg'" />
               </a>
             </div>
             <div class="product-content">
@@ -98,10 +82,7 @@
             </div>
           </div>
         </div>
+    </div>
   <!-- /#page-content-wrapper -->
 </div>
-    <app-footer></app-footer>
 <!-- /#wrapper -->
-  </div>
-</div>
-</div>

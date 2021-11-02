@@ -3,25 +3,28 @@ import { CommonModule } from '@angular/common';
 
 import { ClientRoutingModule } from './client-routing.module';
 import {ProductDetailComponent} from "./product-detail/product-detail.component";
-import {NavComponent} from "./nav/nav.component";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import { HomeComponent } from './home/home.component';
 import { CancelComponent } from './stripe/cancel/cancel.component';
-import { SuccessComponent } from './stripe/success/success.component';
+import { SuccessComponent } from '../cms/changepassword/success/success.component';
 import { CheckoutComponent } from './stripe/checkout/checkout.component';
 import {ClientService} from "../service/client.service";
 import { ShoppingCartComponent } from './shopping-cart/shopping-cart.component';
 import { ProductItemComponent } from './product-detail/product-Item/product-item/product-item.component';
 import { CartItemComponent } from './shopping-cart/cart-item/cart-item.component';
-import {HomeService} from "./home.service";
+import {HomeService} from "../service/home.service";
 import { ProductInfoComponent } from './product-info/product-info/product-info.component';
 import { FooterComponent } from './footer/footer.component';
-
+import { ItemsComponent } from './items/items.component';
+import { OrderhistoryComponent } from './orderhistory/orderhistory.component';
+import { ContactusComponent } from './contactus/contactus.component';
+import { NavComponent } from './nav/nav.component';
+import { FaqComponent } from './faq/faq.component';
+import { AboutComponent } from './about/about.component';
 
 @NgModule({
   declarations: [
     ProductDetailComponent,
-    NavComponent,
     HomeComponent,
     CancelComponent,
     SuccessComponent,
@@ -30,13 +33,22 @@ import { FooterComponent } from './footer/footer.component';
     ProductItemComponent,
     CartItemComponent,
     ProductInfoComponent,
-    FooterComponent
+    FooterComponent,
+    ItemsComponent,
+    OrderhistoryComponent,
+    ContactusComponent,
+    NavComponent,
+    FaqComponent,
+    AboutComponent,
   ],
-  imports: [
-    CommonModule,
-    ClientRoutingModule,
-    FormsModule,
-    ReactiveFormsModule
+    imports: [
+        CommonModule,
+        ClientRoutingModule,
+        FormsModule,
+        ReactiveFormsModule,
+    ],
+  exports: [
+    FooterComponent
   ],
   providers: [ClientService, HomeService]
 })

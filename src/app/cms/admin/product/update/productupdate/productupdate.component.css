@@ -20,7 +20,6 @@
   text-align: center;
   border: dashed 1px #979797;
   position: relative;
-  margin: 0 auto;
 }
 .drag-container input {
   opacity: 0;

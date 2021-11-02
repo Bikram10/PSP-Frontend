@@ -14,14 +14,17 @@ import {Toast, ToastrService} from "ngx-toastr";
 export class LoginComponent implements OnInit {
 
   myForm!: FormGroup;
+
   returnUrl: string = '';
 
   constructor(private route: ActivatedRoute, private toast: ToastrService, private formBuilder: FormBuilder, private router: Router, private authService: AuthenticationService, private token: TokenStorageService, private helper: JwtHelperService) {
   }
 
   ngOnInit(): void {
-    this.returnUrl = this.route.snapshot.queryParams['returnUrl'];
     this.createLoginForm();
+
+    this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
+
   }
 
   createLoginForm(){
@@ -45,10 +48,10 @@ export class LoginComponent implements OnInit {
 
         if(tokenPayload.scopes === "ROLE_ADMIN"){
           this.toast.success("Successfully authenticated");
-          this.router.navigate([this.returnUrl || 'dashboard']);
+          this.router.navigate(['dashboard']);
         } else if (tokenPayload.scopes === "ROLE_USER") {
           this.toast.success("Successfully authenticated");
-          this.router.navigate([this.returnUrl || 'landing-page']);
+          this.router.navigateByUrl(this.returnUrl);
 
         } else {
           this.router.navigate(['/']);
@@ -62,6 +65,10 @@ export class LoginComponent implements OnInit {
 
   register(): void {
     this.router.navigate(["register"])
+  }
+
+  forget(){
+    this.router.navigate(['forget']);
   }
 
 }

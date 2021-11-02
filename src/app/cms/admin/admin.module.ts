@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import {CommonModule, LocationStrategy, PathLocationStrategy} from '@angular/common';
 
-import {AdminRoutingModule} from './admin-routing.module';
 import {DashboardComponent} from "./dashboard/dashboard.component";
 import {TypeComponent} from "./type/type.component";
 import {FiledragdropdirectiveDirective} from "./directive/filedragdropdirective.directive";
@@ -13,31 +12,43 @@ import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {HttpClientModule} from "@angular/common/http";
 import {ProductupdateComponent} from "./product/update/productupdate/productupdate.component";
 import {RegisterComponent} from "./register/register/register.component";
-import {Router, RouterModule} from "@angular/router";
-import {ClientModule} from "../../client/client.module";
 import { CsvComponent } from './product/csv/csv/csv.component';
 import {CsvDirective} from "./directive/csv.directive";
+import { OrderlistComponent } from './orderlist/orderlist/orderlist.component';
+import { ConfirmComponent } from './register/confirm/confirm.component';
+import { ResetPasswordComponent } from './reset-password/reset-password.component';
+import { UserlistComponent } from './userlist/userlist.component';
+import {RouterModule} from "@angular/router";
+import {AdminRoutingModule, routes} from "./admin-routing.module";
+import {LoginComponent} from "./login/login/login.component";
 
 @NgModule({
-  declarations: [
-    DashboardComponent,
-    ProductlistComponent,
-    TypeComponent,
-    FiledragdropdirectiveDirective,
-    ProductComponent,
-    DndDirective,
-    CsvDirective,
-    ProgressComponent,
-    ProductupdateComponent,
-    RegisterComponent,
-    CsvComponent
-  ],
-  imports: [
-    CommonModule,
-    AdminRoutingModule,
-    FormsModule,
-    ReactiveFormsModule,
-    HttpClientModule
-  ]
+    declarations: [
+        DashboardComponent,
+        ProductlistComponent,
+        TypeComponent,
+        FiledragdropdirectiveDirective,
+        ProductComponent,
+        DndDirective,
+        CsvDirective,
+        ProgressComponent,
+        ProductupdateComponent,
+        RegisterComponent,
+        CsvComponent,
+        OrderlistComponent,
+        ConfirmComponent,
+        ResetPasswordComponent,
+        UserlistComponent,
+    ],
+    exports: [
+        ProductComponent
+    ],
+    imports: [
+        CommonModule,
+        FormsModule,
+        AdminRoutingModule,
+        ReactiveFormsModule,
+        HttpClientModule
+    ]
 })
 export class AdminModule { }

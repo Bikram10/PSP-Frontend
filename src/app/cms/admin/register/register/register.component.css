@@ -1,6 +1,6 @@
 body{
   /* This is for setting the background color of our document. */
-  background-color: rgb(211 212 214)
+  background-color: #FFFFFF;;
 }
 
 button{
@@ -22,11 +22,7 @@ button{
   background-color:white;
   width:30%;
   padding: 10px;
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  -webkit-transform: translate(-50%, -50%);
-  transform: translate(-50%, -50%);
+  position: relative;
 
 }
 
@@ -37,5 +33,9 @@ button{
   border-radius: 5px;
   border-color: rgb(219, 219, 219);
   border-style: solid;
-
+}
+.center{
+  display: block;
+  margin: auto;
+  position: relative;
 }

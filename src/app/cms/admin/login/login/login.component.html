@@ -1,6 +1,7 @@
 <body>
 <div id="login">
-  <h3 class="text-center text-white pt-5" style="position: relative; font-size: 20px; top: 2em">PSP Technology Ecommerce</h3>
+  <h3 class="text-center text-dark pt-5" style="position: relative; font-size: 20px; top: 2em">PSP Technology Ecommerce</h3>
+  <img [routerLink]="['/']" class="center" src="assets/logo/logo.png" alt="logo" width="150" style="cursor: pointer"/>
   <div class="container">
     <div id="login-row" class="row justify-content-center align-items-center">
       <div id="login-column" class="col-md-4">
@@ -16,11 +17,13 @@
               <input type="password" formControlName="password" id="password" class="form-control" placeholder="Password">
             </div>
             <div class="form-group">
-              <label for="remember-me" class="text-info"><span>Remember me</span> <span><input id="remember-me" name="remember-me" type="checkbox"></span></label><br>
+              <a (click)="forget()" style="color: red; cursor: pointer" class="small">Forget Password?</a>
+            </div>
+            <div class="form-group">
               <input type="submit" name="submit" class="submit-info" value="Submit" (click)="login()">
             </div>
           </form>
-          <div class="separator" style="margin-top: -2em">New to PSP Technology</div>
+          <div class="separator">New to PSP Technology</div>
           <div class="form-group">
             <input type="button" name="register" class="submit-info" value="Create New Account" (click)="register()">
           </div>

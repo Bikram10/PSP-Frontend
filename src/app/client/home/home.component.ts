@@ -1,11 +1,13 @@
 import {Component, Input, OnInit} from '@angular/core';
 import * as $ from 'jquery';
-import {HomeService} from "../home.service";
+import {HomeService} from "../../service/home.service";
 import {Product} from "../../cms/admin/model/product";
 import {data} from "jquery";
 import {ClientService} from "../../service/client.service";
 import {Type} from "../../cms/admin/model/type";
 import {CartItem} from "../model/cartItem";
+import {Router} from "@angular/router";
+import {LoginInfo} from "../../cms/admin/model/loginInfo";
 
 
 @Component({
@@ -25,16 +27,21 @@ export class HomeComponent implements OnInit {
 
   newArrival: Product[] = [];
   viewedItem: Product[] = [];
-  constructor(private homeService: HomeService, private clientService: ClientService) { }
+
+  constructor(private homeService: HomeService, private clientService: ClientService, private router: Router) { }
 
   ngOnInit(): void {
-
     this.getNewArrivals();
     this.getMostViewed();
     this.exploreMoreItems();
+
+    this.router.navigate([])
   }
 
   getNewArrivals(){
+    this.homeService.authentication().subscribe(res => {
+      console.log(res);
+    })
     this.homeService.getNewArrivals().subscribe((data: any) => {
       this.newArrival = data['content'];
     });

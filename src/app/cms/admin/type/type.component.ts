@@ -1,7 +1,8 @@
 import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
-import {FormBuilder, FormGroup} from "@angular/forms";
+import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {Type} from "../model/type";
 import {AdminService} from "../admin.service";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-category',
@@ -16,7 +17,7 @@ export class TypeComponent implements OnInit {
   formData: FormData = new FormData();
   type: Type = {};
 
-  constructor(private formBuilder: FormBuilder, private adminService: AdminService) {
+  constructor(private router: Router, private formBuilder: FormBuilder, private adminService: AdminService) {
   }
 
   ngOnInit(): void {
@@ -25,7 +26,7 @@ export class TypeComponent implements OnInit {
 
   createCategory(){
     this.myForm = this.formBuilder.group({
-      name: [''],
+      name: ['', Validators.required],
     });
 
   }
@@ -37,7 +38,7 @@ export class TypeComponent implements OnInit {
    * handle file from browsing
    */
   fileBrowseHandler(files: any) {
-    this.prepareFilesList(files.files);
+    this.files = files.files;
   }
 
   /**
@@ -98,8 +99,12 @@ export class TypeComponent implements OnInit {
     return parseFloat((bytes / Math.pow(k, i)).toFixed(dm)) + " " + sizes[i];
   }
 
-  addProduct(){
+  getForm(){
+    return this.myForm.controls;
+  }
 
+  addProduct(){
+    this.router.navigate(['csv']);
   }
 
   onSubmit(){

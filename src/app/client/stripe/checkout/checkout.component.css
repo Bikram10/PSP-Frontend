@@ -1,5 +1,5 @@
 body {
-  font-family: Arial;
+  font-family: "Crimson Text", sans-serif;
   font-size: 17px;
   padding: 8px;
 }
@@ -97,6 +97,7 @@ span.price {
   .row {
     flex-direction: column-reverse;
   }
+
   .col-25 {
     margin-bottom: 20px;
   }

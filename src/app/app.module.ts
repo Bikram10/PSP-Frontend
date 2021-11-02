@@ -13,14 +13,17 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {AdminModule} from "./cms/admin/admin.module";
 import {ToastrModule} from "ngx-toastr";
 import {LoginComponent} from "./cms/admin/login/login/login.component";
-import {AdminRoutingModule} from "./cms/admin/admin-routing.module";
 import { ProductDetailComponent } from './client/product-detail/product-detail.component';
-import { NavComponent } from './client/nav/nav.component';
 import {ClientModule} from "./client/client.module";
+import { ChangepasswordComponent } from './cms/changepassword/changepassword/changepassword.component';
+import {ActivatedRouteSnapshot} from "@angular/router";
+import {LoginGuard} from "./service/login-guard";
+import {LocationStrategy, PathLocationStrategy} from "@angular/common";
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
+    ChangepasswordComponent,
   ],
   imports: [
     BrowserModule,
@@ -28,13 +31,13 @@ import {ClientModule} from "./client/client.module";
     FormsModule,
     ClientModule,
     ReactiveFormsModule,
-    HttpClientModule,
     AppRoutingModule,
-    AdminRoutingModule,
+    HttpClientModule,
     ToastrModule.forRoot({
       timeOut: 1000,
       positionClass: 'toast-bottom-right'
     }),
+
     JwtModule.forRoot({
       config: {
         tokenGetter: tokenGetter,
@@ -52,7 +55,11 @@ import {ClientModule} from "./client/client.module";
     AuthenticationService,
     TokenStorageService,
     RoleGuardService,
+    AdminModule,
+    LoginGuard,
     JwtHelperService],
+  exports: [
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -1,13 +1,12 @@
 body {
   margin: 0;
   padding: 0;
-  background-color: rgb(211 212 214);
+  background-color: #FFFFFF;
   height: 100vh;
 }
 #login .container #login-row #login-column #login-box {
-  margin-top: 40px;
   max-width: 600px;
-  height: 320px;
+  height: 352px;
   border: 1px solid #9C9C9C;
   background-color: #FFFFFF;
 }
@@ -54,5 +53,12 @@ body {
 
 .separator:not(:empty)::after {
   margin-left: .25em;
+}
+
+.center{
+  display: block;
+  margin: auto;
+  position: relative;
+  top: 1em;
 }
 

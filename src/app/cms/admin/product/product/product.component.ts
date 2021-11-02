@@ -82,7 +82,9 @@ export class ProductComponent implements OnInit {
    * @param files (Files List)
    */
   prepareFilesList(files: Array<any>) {
+
     for (const item of files) {
+      console.log(item);
       item.progress = 0;
       this.files.push(item);
     }
@@ -147,13 +149,14 @@ export class ProductComponent implements OnInit {
 
 
     this.formData.append('product', new Blob([JSON.stringify(this.product)], {type: 'application/json'}));
+    console.log(this.files);
     this.formData.append("file", this.files[0]);
     console.log(this.myForm.value);
-    // this.adminService.saveProduct(this.formData).subscribe(
-    //   res =>{
-    //     this.toast.show("Product added successfully");
-    //   }
-    // )
+    this.adminService.saveProduct(this.formData).subscribe(
+      res =>{
+        this.toast.show("Product added successfully");
+      }
+    )
 
   }
 

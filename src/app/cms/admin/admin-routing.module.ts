@@ -8,16 +8,22 @@ import {ProductlistComponent} from "./product/productlist/productlist.component"
 import {ProductupdateComponent} from "./product/update/productupdate/productupdate.component";
 import {RegisterComponent} from "./register/register/register.component";
 import {CsvComponent} from "./product/csv/csv/csv.component";
+import {ConfirmComponent} from "./register/confirm/confirm.component";
+import {OrderlistComponent} from "./orderlist/orderlist/orderlist.component";
+import {ResetPasswordComponent} from "./reset-password/reset-password.component";
 
 export const routes: Routes = [
-    {path: 'login', component: LoginComponent},
-    {path: 'register', component: RegisterComponent},
-    {path: 'category', component: TypeComponent},
-    {path: 'product', component: ProductComponent},
-    {path: 'csvupload', component: CsvComponent},
-    {path: 'productList', component: ProductlistComponent},
-    {path: 'edit/:id', component:ProductupdateComponent},
-    {path: 'csv', component: CsvComponent}
+  {path: 'register', component: RegisterComponent},
+  {path: '', component: DashboardComponent, children: [
+      {path: 'category', component: TypeComponent},
+      {path: 'product', component: ProductComponent},
+      {path: 'listProduct', component: ProductlistComponent},
+      {path: 'edit/:id', component:ProductupdateComponent},
+      {path: 'csv', component: CsvComponent},
+      {path: 'confirm', component: ConfirmComponent},
+      {path: 'orderList', component: OrderlistComponent},
+      {path: 'reset', component: ResetPasswordComponent}
+    ]}
 ];
 
 @NgModule({

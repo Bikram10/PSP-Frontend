@@ -1,10 +1,13 @@
 import { Injectable } from '@angular/core';
-import {HttpClient, HttpEvent} from "@angular/common/http";
+import {HttpClient, HttpEvent, HttpParams} from "@angular/common/http";
 import {Constants} from "../../shared/constants";
 import {Observable} from "rxjs";
 import {Type} from "./model/type";
 import {Form} from "@angular/forms";
 import {Product} from "./model/product";
+import {Order} from "../../client/model/order";
+import {Register} from "./model/register";
+import {AuthLogin} from "./model/auth-login";
 
 @Injectable({
   providedIn: 'root'
@@ -61,4 +64,23 @@ export class AdminService {
     });
   }
 
+  getOrderService(): Observable<Order[]>{
+    return this.http.get<Order[]>(this.baseUrl+"/orderApi/orderList");
+  }
+
+  updateStatus(id: any, status: any): Observable<any> {
+    let params: HttpParams = new HttpParams().set('id', id)
+      .set('status', status)
+    return this.http.post(this.baseUrl+"/orderApi/updateStatus", params);
+  }
+
+  resetPwd(email: string): Observable<any>{
+    let params = new HttpParams().set('email', email);
+    return this.http.post(this.baseUrl+"/reset", params);
+  }
+
+  changePassword(token: string): Observable<any>{
+    let params = new HttpParams().set('token', token);
+    return this.http.post<any>(this.baseUrl+"/changePassword", params);
+  }
 }
